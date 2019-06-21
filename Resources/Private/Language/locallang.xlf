@@ -27,7 +27,7 @@
 
 			<!-- Mail template -->
 			<trans-unit id="mail.title">
-				<source>New Guest feedback</source>
+				<source>New Guest Feedback</source>
 			</trans-unit>
 			<trans-unit id="mail.hello">
 				<source>Hallo</source>
@@ -75,7 +75,7 @@
 				<source>Guestbook</source>
 			</trans-unit>
 			<trans-unit id="latest.visit">
-				<source>Visit guestbook</source>
+				<source>Visit Guestbook</source>
 			</trans-unit>
 			<!-- Latest file -->
 
@@ -93,7 +93,7 @@
 
 			<!-- New file -->
 			<trans-unit id="new.heading">
-				<source>New guestbook</source>
+				<source>New Guestbook</source>
 			</trans-unit>
 			<trans-unit id="new.create">
 				<source>Send Feedback</source>
@@ -102,7 +102,7 @@
 
 			<!-- Show File -->
 			<trans-unit id="show.heading">
-				<source>Single View for guestbook</source>
+				<source>Single View for Guestbook</source>
 			</trans-unit>
 			<trans-unit id="show.back">
 				<source>Back to list</source>
@@ -127,7 +127,7 @@
 
 			<!-- Flex form labels -->
 			<trans-unit id="flexform.thankyouPageId">
-				<source>Thankyou Page Id</source>
+				<source>Thank You Page Id</source>
 			</trans-unit>			
 			<trans-unit id="flexform.adminEmail">
 				<source>Admin Email</source>
@@ -177,16 +177,10 @@
 			<trans-unit id="nsguestbook_latestmessages">
 				<source>Guestbook: Latest Messages</source>
 			</trans-unit>
-
 			<trans-unit id="require">
 				<source>* These fields are required.</source>
 			</trans-unit>
-
-
-
-
-			<!-- Flex form labels -->
-			
+			<!-- Flex form labels -->			
 		</body>
 	</file>
 </xliff>
