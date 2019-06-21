@@ -1,0 +1,41 @@
+
+<f:layout name="Default" />
+
+This template displays a NEW form for the current domain object.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        New.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+	<f:if condition="{settings.maintitle}">
+		<f:then>
+			<h1>{settings.maintitle}</h1>
+		</f:then>
+	</f:if>
+
+	<f:flashMessages />
+	<h3 class="succMsg" style="display: none;">Thank You for your feedback</h3>
+	<f:render partial="FormErrors" arguments="{object:Nsguestbook}" />
+	<f:form controller="Nsguestbook" id="guestBookForm" action="create"  name="newNsguestbook" object="{newNsguestbook}">
+		<div class="ns-form-row">
+			<f:render partial="Nsguestbook/FormFields" arguments="{nsguestbookdata:nsguestbookdata}" />
+			<div class="ns-form-group">
+				<div class="g-recaptcha" data-sitekey="{sitekey}"></div>
+			</div>
+			<div class="ns-form-group">
+				<p class="text-muted"><f:translate key="require"></f:translate></p>
+			</div>
+			<div class="ns-form-group">
+				<f:form.submit class="btn ns-btn submit" value="<f:translate key='new.create' />" />
+			</div>
+		</div>
+	</f:form>
+
+</f:section>
+

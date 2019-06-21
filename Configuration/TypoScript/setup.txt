@@ -1,0 +1,39 @@
+
+plugin.tx_nsguestbook_form {
+	view {
+		templateRootPaths.0 = {$plugin.tx_nsguestbook_form.view.templateRootPath}
+		partialRootPaths.0 = {$plugin.tx_nsguestbook_form.view.partialRootPath}
+		layoutRootPaths.0 = {$plugin.tx_nsguestbook_form.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_nsguestbook_form.persistence.storagePid}
+		sitekey = {$plugin.tx_nsguestbook_form.persistence.sitekey}
+		secretkey = {$plugin.tx_nsguestbook_form.persistence.secretkey}
+	}
+	settings {
+		autoaprrove = {$plugin.tx_nsguestbook_form.settings.autoaprrove}
+	}
+	mvc{
+		callDefaultActionIfActionCantBeResolved = 1
+	}
+}
+
+[globalVar = LIT:1 = {$plugin.tx_nssnow_nssnows.settings.jQuery}]
+    page.includeJS.guestbook = typo3conf/ext/ns_guestbook/Resources/Public/js/jquery-2.1.0.js
+[global]
+
+
+page{
+	includeCSS {
+		1000 = EXT:ns_guestbook/Resources/Public/css/custom.css
+		
+	}	
+	includeJS{		
+		1000 = https://www.google.com/recaptcha/api.js
+		1000.external= 1		
+		1005 = EXT:ns_guestbook/Resources/Public/ckeditor/ckeditor.js
+	}
+	includeJSFooter {
+		1010 = EXT:ns_guestbook/Resources/Public/js/custom.js
+	}
+}

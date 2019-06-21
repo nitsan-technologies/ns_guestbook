@@ -1,0 +1,36 @@
+{
+  "name": "nitsan/ns-guestbook",
+  "type": "typo3-cms-extension",
+  "description": "One of the only TYPO3 extension which provides to integrate all the features of Guestbook like review form with send mail, list of guest. Know more from extension manual.",
+  "homepage": "https://extensions.typo3.org/extension/ns_guestbook/",
+  "license": "GPL-2.0+",
+  "keywords": [
+    "TYPO3 CMS",
+    "Guestbook",
+    "Nitsan",
+    "Guest",
+    "Book",
+    "Feedback",
+    "Review"
+  ],
+  "support": {
+    "issues": "https://github.com/nitsan-technologies/ns_guestbook/issues"
+  },
+  "require": {
+    "typo3/cms-core": ">=6.2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Nitsan\\NsGuestbook\\": "Classes/"
+    }
+  },
+  "replace": {
+      "ns_guestbook": "self.version",
+      "nitsan/ns-guestbook": "self.version"
+  },
+  "extra": {
+      "typo3/cms": {
+          "extension-key": "ns_guestbook"
+      }
+  }
+}

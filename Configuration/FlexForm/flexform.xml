@@ -1,0 +1,278 @@
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>Function</sheetTitle>
+                </TCEforms>                
+                <type>array</type>
+                <el>
+                    <switchableControllerActions>
+                        <TCEforms>
+                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.select</label>
+                            <onChange>reload</onChange>
+                            <config>
+                                <type>select</type>
+                                <items>
+                                    <numIndex index="0">
+                                        <numIndex index="0">
+                                            LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.selectMenu
+                                        </numIndex>
+                                        <numIndex index="1"></numIndex>
+                                    </numIndex>
+                                    <numIndex index="1">
+                                        <numIndex index="0">LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.disForm</numIndex>
+                                        <numIndex index="1">Nsguestbook->new;Nsguestbook->create;</numIndex>
+                                    </numIndex>
+                                    <numIndex index="2">
+                                        <numIndex index="0">LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.disLtsList</numIndex>
+                                        <numIndex index="1">Nsguestbook->latest;Nsguestbook->show;</numIndex>
+                                    </numIndex>
+                                    <numIndex index="3">
+                                        <numIndex index="0">LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.disList</numIndex>
+                                        <numIndex index="1">Nsguestbook->list;Nsguestbook->show;</numIndex>
+                                    </numIndex>
+                                    <numIndex index="4">
+                                        <numIndex index="0">LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.disDetail</numIndex>
+                                        <numIndex index="1">Nsguestbook->show;Nsguestbook->list;Nsguestbook->latest;</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </switchableControllerActions>
+                    <settings.maintitle>
+                        <TCEforms>
+                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.maintitle</label>
+                            <config>
+                                <type>input</type>
+                                <size>40</size>
+                                <eval>trim</eval>
+                            </config>
+                        </TCEforms>
+                    </settings.maintitle>
+                    <settings.adminName>
+                        <TCEforms>
+                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.adminName</label>
+                            <displayCond>FIELD:switchableControllerActions:=:Nsguestbook->new;Nsguestbook->create;</displayCond>
+                            <config>
+                                <type>input</type>
+                                <size>40</size>
+                                <eval>trim,required</eval>
+                            </config>
+                        </TCEforms>
+                    </settings.adminName>
+                    <settings.adminEmail>
+                        <TCEforms>
+                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.adminEmail</label>
+                            <displayCond>FIELD:switchableControllerActions:=:Nsguestbook->new;Nsguestbook->create;</displayCond>
+                            <config>
+                                <type>input</type>
+                                <size>20</size>
+                                <wizards type="array">
+                                    <_PADDING>2</_PADDING>
+                                    <link type="array">
+                                        <type>popup</type>
+                                        <title>Link</title>
+                                        <icon>link_popup.gif</icon>
+                                        <module type="array">
+                                            <name>wizard_element_browser</name>
+                                            <urlParameters type="array">
+                                                <mode>wizard</mode>
+                                            </urlParameters>
+                                        </module>
+                                        <JSopenParams>height=300,width=500,status=0,menubar=0,scrollbars=1</JSopenParams>
+                                        <params type="array">
+                                            <blindLinkOptions>file,page,spec,url,folder</blindLinkOptions>
+                                            <blindLinkFields>class,params,target,title</blindLinkFields>
+                                        </params>
+                                    </link>
+                                </wizards>
+                                <softref>typolink</softref>
+                                <eval>trim,required</eval>
+                            </config>
+                        </TCEforms>
+                    </settings.adminEmail>
+                    <settings.emailSubject>
+                        <TCEforms>
+                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.emailSubject
+                            </label>
+                            <displayCond>FIELD:switchableControllerActions:=:Nsguestbook->new;Nsguestbook->create;</displayCond>
+                            <config>
+                                <type>input</type>
+                                <size>40</size>
+                                <eval>trim,required</eval>
+                            </config>
+                        </TCEforms>
+                    </settings.emailSubject>
+                    <settings.totalnumber>
+                        <TCEforms>
+                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.totalnumber</label>
+                            <displayCond>
+                                <OR>
+                                    <numIndex index="0">FIELD:switchableControllerActions:=:Nsguestbook->latest;Nsguestbook->show;</numIndex>
+                                    <numIndex index="1">FIELD:switchableControllerActions:=:Nsguestbook->list;Nsguestbook->show;</numIndex>
+                                </OR>
+                            </displayCond>
+                            <config>
+                                <type>input</type>
+                                <size>40</size>
+                                <default>5</default>
+                                <eval>trim,num</eval>
+                            </config>
+                        </TCEforms>
+                    </settings.totalnumber>
+                    <settings.sorting>
+                        <TCEforms>
+                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.sorting</label>
+                            <displayCond>FIELD:switchableControllerActions:=:Nsguestbook->list;Nsguestbook->show;</displayCond>
+                            <config>
+                                <type>select</type>
+                                <items>
+                                    <numIndex index="1">
+                                        <numIndex index="0">
+                                            LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.newfirst
+                                        </numIndex>
+                                        <numIndex index="1">DESCENDING</numIndex>
+                                    </numIndex>
+                                    <numIndex index="2">
+                                        <numIndex index="0">
+                                            LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.oldfirst
+                                        </numIndex>
+                                        <numIndex index="1">ASCENDING</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.sorting>
+                    <settings.detailpage>
+                        <TCEforms>
+                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.detailpage</label>
+                            <displayCond>
+                                <OR>
+                                    <numIndex index="0">FIELD:switchableControllerActions:=:Nsguestbook->latest;Nsguestbook->show;</numIndex>
+                                    <numIndex index="1">FIELD:switchableControllerActions:=:Nsguestbook->list;Nsguestbook->show;</numIndex>
+                                </OR>
+                            </displayCond>
+                            <config>
+                                <type>input</type>
+                                <size>20</size>
+                                <wizards type="array">
+                                    <_PADDING>2</_PADDING>
+                                    <link type="array">
+                                        <type>popup</type>
+                                        <title>Link</title>
+                                        <icon>link_popup.gif</icon>
+                                        <module type="array">
+                                            <name>wizard_element_browser</name>
+                                            <urlParameters type="array">
+                                                <mode>wizard</mode>
+                                            </urlParameters>
+                                        </module>
+                                        <JSopenParams>height=300,width=500,status=0,menubar=0,scrollbars=1</JSopenParams>
+                                        <params type="array">
+                                            <blindLinkOptions>file,spec,folder,mail</blindLinkOptions>
+                                        </params>
+                                    </link>
+                                </wizards>
+                            </config>
+                        </TCEforms>
+                    </settings.detailpage>
+                    <settings.newformpage>
+                        <TCEforms>
+                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.newformpage</label>
+                            <displayCond>
+                                <OR>
+                                    <numIndex index="0">FIELD:switchableControllerActions:=:Nsguestbook->latest;Nsguestbook->show;</numIndex>
+                                    <numIndex index="1">FIELD:switchableControllerActions:=:Nsguestbook->list;Nsguestbook->show;</numIndex>
+                                </OR>
+                            </displayCond>
+                            <config>
+                                <type>input</type>
+                                <size>20</size>
+                                <wizards type="array">
+                                    <_PADDING>2</_PADDING>
+                                    <link type="array">
+                                        <type>popup</type>
+                                        <title>Link</title>
+                                        <icon>link_popup.gif</icon>
+                                        <module type="array">
+                                            <name>wizard_element_browser</name>
+                                            <urlParameters type="array">
+                                                <mode>wizard</mode>
+                                            </urlParameters>
+                                        </module>
+                                        <JSopenParams>height=300,width=500,status=0,menubar=0,scrollbars=1</JSopenParams>
+                                        <params type="array">
+                                            <blindLinkOptions>file,spec,folder,mail</blindLinkOptions>
+                                        </params>
+                                    </link>
+                                </wizards>
+                            </config>
+                        </TCEforms>
+                    </settings.newformpage>
+                    <settings.storagepage>
+                        <TCEforms>
+                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.storagepage</label>
+                            <displayCond>
+                                <OR>
+                                    <numIndex index="0">FIELD:switchableControllerActions:=:Nsguestbook->latest;Nsguestbook->show;</numIndex>
+                                    <numIndex index="1">FIELD:switchableControllerActions:=:Nsguestbook->list;Nsguestbook->show;</numIndex>
+                                </OR>
+                            </displayCond>
+                            <config>
+                                <type>input</type>
+                                <size>20</size>
+                                <wizards type="array">
+                                    <_PADDING>2</_PADDING>
+                                    <link type="array">
+                                        <type>popup</type>
+                                        <title>Link</title>
+                                        <icon>link_popup.gif</icon>
+                                        <module type="array">
+                                            <name>wizard_element_browser</name>
+                                            <urlParameters type="array">
+                                                <mode>wizard</mode>
+                                            </urlParameters>
+                                        </module>
+                                        <JSopenParams>height=300,width=500,status=0,menubar=0,scrollbars=1</JSopenParams>
+                                        <params type="array">
+                                            <blindLinkOptions>file,spec,mail,url</blindLinkOptions>
+                                        </params>
+                                    </link>
+                                </wizards>
+                            </config>
+                        </TCEforms>
+                    </settings.storagepage>
+                    <settings.backpage>
+                        <TCEforms>
+                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.backpage</label>
+                            <displayCond>FIELD:switchableControllerActions:=:Nsguestbook->show;Nsguestbook->list;Nsguestbook->latest;</displayCond>
+                            <config>
+                                <type>input</type>
+                                <size>20</size>
+                                <wizards type="array">
+                                    <_PADDING>2</_PADDING>
+                                    <link type="array">
+                                        <type>popup</type>
+                                        <title>Link</title>
+                                        <icon>link_popup.gif</icon>
+                                        <module type="array">
+                                            <name>wizard_element_browser</name>
+                                            <urlParameters type="array">
+                                                <mode>wizard</mode>
+                                            </urlParameters>
+                                        </module>
+                                        <JSopenParams>height=300,width=500,status=0,menubar=0,scrollbars=1</JSopenParams>
+                                        <params type="array">
+                                            <blindLinkOptions>file,spec,folder,email</blindLinkOptions>
+                                        </params>
+                                    </link>
+                                </wizards>
+                            </config>
+                        </TCEforms>
+                    </settings.backpage>
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets> 
+</T3DataStructure>

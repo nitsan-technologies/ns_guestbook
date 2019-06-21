@@ -1,0 +1,31 @@
+<div class="comment-main-level">
+    <div class="comment-avatar">
+        <div class="entry-author-info">
+            <span class="author-avatar"><f:image src="EXT:ns_guestbook/Resources/Public/Icons/person-default.png" width='32px' height='32px'/></span>
+        </div>
+    </div>
+
+    <!-- Comment -->
+    <div class="comment-box">
+        <div class="comment-head">
+            <div class="comment-author">
+                <strong>{nsguestbook.name}</strong>
+                <span class="text-muted">
+                    <f:if condition="{nsguestbook.tstamp}">
+                        <f:then>
+                           <f:format.date format="M d,Y">{nsguestbook.tstamp}</f:format.date> <f:translate key="list.at" />  <f:format.date format="H:i">{nsguestbook.tstamp}</f:format.date>
+                        </f:then>
+                    </f:if>
+                </span>
+            </div>
+        </div>
+
+        <div class="comment-content">
+            <f:format.nl2br><f:format.raw><f:format.crop maxCharacters="150"><f:format.stripTags value="{nsguestbook.message}" /></f:format.crop></f:format.raw></f:format.nl2br>
+            <div class="read-more">
+                <f:link.action class="more btn" title="Post Title" action="show" pageUid="{settings.detailpage}" arguments="{nsguestbook : nsguestbook}">Read more</f:link.action>
+            </div>
+        </div>
+    </div>
+</div>
+
