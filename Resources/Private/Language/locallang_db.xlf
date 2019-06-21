@@ -4,7 +4,7 @@
 		<header/>
 		<body>
 			<trans-unit id="tx_nsguestbook_domain_model_nsguestbook">
-				<source>Nitsan Guestbook</source>
+				<source>NITSAN Guestbook</source>
 			</trans-unit>
 			<trans-unit id="tx_nsguestbook_domain_model_nsguestbook.name">
 				<source>Name</source>
@@ -25,7 +25,7 @@
 				<source>Captcha</source>
 			</trans-unit>
 			<trans-unit id="flexform.thankyouPageId">
-				<source>Thankyou Page Id</source>
+				<source>Thank You Page Id</source>
 			</trans-unit>			
 			<trans-unit id="flexform.adminEmail">
 				<source>Admin Email</source>
@@ -87,9 +87,6 @@
 			<trans-unit id="flexform.disDetail">
 				<source>Detail</source>
 			</trans-unit>
-
-
-
 			<trans-unit id="flexform.Nsguestbook->latest;Nsguestbook->show;">
 				<source>Latest Message List</source>
 			</trans-unit>
@@ -102,13 +99,9 @@
 			<trans-unit id="flexform.Nsguestbook->show;Nsguestbook->list;Nsguestbook->latest;">
 				<source>Detail</source>
 			</trans-unit>
-
 			<trans-unit id="flexform.function">
 				<source>Function</source>
 			</trans-unit>
-
-
-
 		</body>
 	</file>
 </xliff>
