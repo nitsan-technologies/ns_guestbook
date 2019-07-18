@@ -7,12 +7,12 @@ if (!defined('TYPO3_MODE')) {
 	'Nitsan.' . $_EXTKEY,
 	'Form',
 	array(
-		'Nsguestbook' => 'new, create',
+		'Nsguestbook' => 'new',
 		
 	),
 	// non-cacheable actions
 	array(
-		'Nsguestbook' => '',
+		'Nsguestbook' => 'create',
 		
 	)
 );
