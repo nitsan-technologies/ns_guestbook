@@ -100,6 +100,16 @@
                             </config>
                         </TCEforms>
                     </settings.emailSubject>
+                    <settings.captcha>
+                        <TCEforms>
+                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.captcha</label>
+                            <displayCond>FIELD:switchableControllerActions:=:Nsguestbook->new;Nsguestbook->create;</displayCond>
+                            <config>
+                                <type>check</type>
+                                <default>1</default>
+                            </config>
+                         </TCEforms>
+                    </settings.captcha>
                     <settings.totalnumber>
                         <TCEforms>
                             <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.totalnumber</label>

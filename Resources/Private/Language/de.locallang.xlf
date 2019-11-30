@@ -1,190 +1,189 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2018-06-06T16:21:34Z" product-name="ns_guestbook">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2016-11-08T11:15:02Z" product-name="ns_guestbook">
 		<header/>
 		<body>
 			<trans-unit id="tx_nsguestbook_domain_model_nsguestbook">
-				<source>Nsguestbook</source>
+				<target>Nsguestbook</target>
 			</trans-unit>
 			<trans-unit id="tx_nsguestbook_domain_model_nsguestbook.name">
-				<source>Name</source>
+				<target>Name</target>
 			</trans-unit>
 			<trans-unit id="tx_nsguestbook_domain_model_nsguestbook.city">
-				<source>City</source>
+				<target>Stadt</target>
 			</trans-unit>
 			<trans-unit id="tx_nsguestbook_domain_model_nsguestbook.email">
-				<source>Email</source>
+				<target>Email</target>
 			</trans-unit>
 			<trans-unit id="tx_nsguestbook_domain_model_nsguestbook.website">
-				<source>Website</source>
+				<target>Website</target>
 			</trans-unit>
 			<trans-unit id="tx_nsguestbook_domain_model_nsguestbook.message">
-				<source>Message</source>
+				<target>Botschaft</target>
 			</trans-unit>
 			<trans-unit id="tx_nsguestbook_domain_model_nsguestbook.captcha">
-				<source>Captcha</source>
+				<target>Captcha</target>
 			</trans-unit>
 			<trans-unit id="tx_nsguestbook_domain_model_nsguestbook.terms">
-				<source>Terms accepted</source>
+				<target>AGB akzeptiert</target>
 			</trans-unit>
 
 			<!-- Mail template -->
 			<trans-unit id="mail.title">
-				<source>New Guest feedback</source>
+				<target>Neues Gästefeedback</target>
 			</trans-unit>
 			<trans-unit id="mail.hello">
-				<source>Hello</source>
+				<target>Hallo</target>
 			</trans-unit>
 			<trans-unit id="mail.msg">
-				<source>Following is new feedback information</source>
+				<target>Es folgen neue Feedback-Informationen</target>
 			</trans-unit>
 			<trans-unit id="mail.Name">
-				<source>Name</source>
+				<target>Name</target>
 			</trans-unit>
 			<trans-unit id="mail.City">
-				<source>City</source>
+				<target>Stadt</target>
 			</trans-unit>
 			<trans-unit id="mail.Email">
-				<source>Email</source>
+				<target>Email</target>
 			</trans-unit>
 			<trans-unit id="mail.Website">
-				<source>Website</source>
+				<target>Website</target>
 			</trans-unit>
 			<trans-unit id="mail.Message">
-				<source>Message</source>
+				<target>Message</target>
 			</trans-unit>
 			<trans-unit id="mail.regards">
-				<source>Regards.</source>
+				<target>Grüße.</target>
 			</trans-unit>
 			<!-- Mail template -->
 
 			<!-- Controller msg -->
 			<trans-unit id="controller.checkcaptcha.msg">
-				<source>Please check the the captcha form.</source>
+				<target>Bitte überprüfen Sie das Captcha-Formular.</target>
 			</trans-unit>
 			<trans-unit id="controller.wrongcaptcha.msg">
-				<source>Sorry, Wrong captcha!</source>
+				<target>Sorry, falsches Captcha!</target>
 			</trans-unit>
 			<trans-unit id="controller.thanks.msg">
-				<source>Your feedback is saved successfully! Thank you!</source>
+				<target>Ihr Feedback wurde erfolgreich gespeichert! Vielen Dank!</target>
 			</trans-unit>
 			<trans-unit id="controller.insertError.msg">
-				<source>Please Insert following valid Information.</source>
+				<target>Bitte geben Sie die folgenden gültigen Informationen ein.</target>
 			</trans-unit>
 			<!-- Controller msg -->
 
 			<!-- Latest file -->
 			<trans-unit id="latest.heading">
-				<source>Guestbook</source>
+				<target>Guestbook</target>
 			</trans-unit>
 			<trans-unit id="latest.visit">
-				<source>Visit guestbook</source>
+				<target>Gästebuch besuchen</target>
 			</trans-unit>
 			<!-- Latest file -->
 
 			<!-- list file -->
 			<trans-unit id="list.from">
-				<source>from</source>
+				<target>from</target>
 			</trans-unit>
 			<trans-unit id="list.wroteon">
-				<source>Wrote on</source>
+				<target>Wrote on</target>
 			</trans-unit>
 			<trans-unit id="list.at">
-				<source>at</source>
+				<target>at</target>
 			</trans-unit>
 			<!-- list file -->
 
 			<!-- New file -->
 			<trans-unit id="new.heading">
-				<source>New guestbook</source>
+				<target>Neues Gästebuch</target>
 			</trans-unit>
 			<trans-unit id="new.create">
-				<source>Send Feedback</source>
+				<target>Feedback schicken</target>
 			</trans-unit>
 			<!-- New file -->
 
 			<!-- Show File -->
 			<trans-unit id="show.heading">
-				<source>Single View for guestbook</source>
+				<target>Einzelansicht für Gästebuch</target>
 			</trans-unit>
 			<trans-unit id="show.back">
-				<source>Back to list</source>
+				<target>Zurück zur Liste</target>
 			</trans-unit>
 			<!-- Show File -->
 
 			<trans-unit id="emptymsg">
-				<source>No records found!!</source>
+				<target>Keine Aufzeichnungen gefunden!!</target>
 			</trans-unit>
 
 			<!-- Error messages -->
 			<trans-unit id="validator.newNsguestbook.name.1221560718">
-			    <source>Field name is required.</source>
+			    <target>Feldname ist erforderlich.</target>
 			</trans-unit>
 			<trans-unit id="validator.newNsguestbook.email.1221560718">
-			    <source>Field email is required.</source>
+			    <target>Feld E-Mail ist erforderlich.</target>
 			</trans-unit>
 			<trans-unit id="validator.newNsguestbook.email.1221559976">
-			    <source>Invalid Email Address</source>
+			    <target>Ungültige E-Mail-Adresse</target>
 			</trans-unit>
 			<!-- Error messages -->
 
 			<!-- Flex form labels -->
 			<trans-unit id="flexform.thankyouPageId">
-				<source>Thankyou Page Id</source>
+				<target>Danke Page-ID</target>
 			</trans-unit>			
 			<trans-unit id="flexform.adminEmail">
-				<source>Admin Email</source>
+				<target>Administrator E-Mail</target>
 			</trans-unit>
 			<trans-unit id="flexform.adminName">
-				<source>Admin Name</source>
+				<target>Administratorname</target>
 			</trans-unit>
 			<trans-unit id="flexform.emailSubject">
-				<source>Email Subject</source>
+				<target>E-Mail Betreff</target>
 			</trans-unit>
 			<trans-unit id="flexform.totalnumber">
-				<source>Show Number of Rows</source>
+				<target>Anzahl der Zeilen anzeigen</target>
 			</trans-unit>
 			<trans-unit id="flexform.sorting">
-				<source>Sorting</source>
+				<target>Sortierung</target>
 			</trans-unit>
 			<trans-unit id="flexform.newfirst">
-				<source>Newest First</source>
+				<target>Das neuste zuerst</target>
 			</trans-unit>
 			<trans-unit id="flexform.oldfirst">
-				<source>Oldest First</source>
+				<target>Die ältesten zu erst</target>
 			</trans-unit>
 			<trans-unit id="flexform.detailpage">
-				<source>Detail page</source>
+				<target>Detailseite</target>
 			</trans-unit>
 			<trans-unit id="flexform.newformpage">
-				<source>Guest form page</source>
+				<target>Gastformularseite</target>
 			</trans-unit>
 			<trans-unit id="flexform.backpage">
-				<source>Select Back page</source>
+				<target>Wählen Sie Rückseite</target>
 			</trans-unit>
 			<trans-unit id="flexform.maintitle">
-				<source>Main Title</source>
+				<target>Überschrift</target>
 			</trans-unit>
 			<trans-unit id="flexform.storagepage">
-				<source>Select Storage page</source>
+				<target>Speicherseite auswählen</target>
 			</trans-unit>
 			<trans-unit id="nsguestbook_form">
-				<source>Guestbook: Form</source>
+				<target>Gästebuch: Formular</target>
 			</trans-unit>
 			<trans-unit id="nsguestbook_messages">
-				<source>Guestbook: Messages</source>
+				<target>Gästebuch: Nachrichten</target>
 			</trans-unit>
 			<trans-unit id="nsguestbook_detailpage">
-				<source>Guestbook: Show Detail</source>
+				<target>Gästebuch: Detail anzeigen</target>
 			</trans-unit>
 			<trans-unit id="nsguestbook_latestmessages">
-				<source>Guestbook: Latest Messages</source>
+				<target>Gästebuch: Neueste Nachrichten</target>
 			</trans-unit>
 
 			<trans-unit id="require">
-				<source>* These fields are required.</source>
+				<target>* Diese Felder müssen ausgefüllt werden.</target>
 			</trans-unit>
-			<!-- Flex form labels -->
 		</body>
 	</file>
 </xliff>

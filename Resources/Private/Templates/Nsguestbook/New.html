@@ -25,9 +25,11 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	<f:form controller="Nsguestbook" id="guestBookForm" action="create"  name="newNsguestbook" object="{newNsguestbook}">
 		<div class="ns-form-row">
 			<f:render partial="Nsguestbook/FormFields" arguments="{nsguestbookdata:nsguestbookdata}" />
-			<div class="ns-form-group">
-				<div class="g-recaptcha" data-sitekey="{sitekey}"></div>
-			</div>
+			<f:if condition="{settings.captcha}==0">
+				<div class="ns-form-group">
+					<div class="g-recaptcha" data-sitekey="{sitekey}"></div>
+				</div>
+			</f:if>
 			<div class="ns-form-group">
 				<p class="text-muted"><f:translate key="require"></f:translate></p>
 			</div>

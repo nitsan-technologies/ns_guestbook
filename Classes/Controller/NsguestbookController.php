@@ -84,22 +84,20 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     public function createAction(\Nitsan\NsGuestbook\Domain\Model\Nsguestbook $newNsguestbook)
     {
-
+        $settings = $this->settings;
         if (isset($_POST['g-recaptcha-response'])) {
             $captcha = $_POST['g-recaptcha-response'];
         }
-        
-        if (!$captcha) {
+        if (!$captcha && $settings['captcha']==0) {
             $checkcaptchamsg = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('controller.checkcaptcha.msg',
                 'ns_guestbook');
-        //Debug::var_dump($_POST);die;
             $this->addFlashMessage($checkcaptchamsg, '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,true);
             $this->redirect('new', 'Nsguestbook', 'ns_guestbook', $_REQUEST);
         } else {
             $secretkey = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_nsguestbook_form.']['persistence.']['secretkey'];
             $response = json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $secretkey . "&response=" . $captcha . "&remoteip=" . $_SERVER['REMOTE_ADDR']),
                 true);
-            if ($response['success'] == false) {
+            if ($response['success'] == false && $settings['captcha']==0) {
                 $wrongcaptcha = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('controller.wrongcaptcha.msg',
                     'ns_guestbook');
                 $this->addFlashMessage($wrongcaptcha, '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,true);
@@ -112,8 +110,6 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                 } else {
                     $newNsguestbook->setHidden('1');
                 }
-                // $newNsguestbook->setPid(2);
-                // Debug::var_dump($newNsguestbook);die;
                 $this->nsguestbookRepository->add($newNsguestbook);
 
                 // User name and mail
