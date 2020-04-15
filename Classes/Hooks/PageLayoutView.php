@@ -4,7 +4,6 @@ namespace Nitsan\NsGuestbook\Hooks;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHookInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Service\FlexFormService;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
@@ -20,8 +19,15 @@ class PageLayoutView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHo
             $view = $this->getFluidTemplate($extKey, 'GuestPreview');
 
             if (!empty($row['pi_flexform'])) {
+
+                if (version_compare(TYPO3_branch, '10.0', '>')) {                    
+                    $flexFormService = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Service\FlexFormService::class);
+                } else {                    
+                    $flexFormService = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Service\FlexFormService::class);
+                }
+
                 /** @var FlexFormService $flexFormService */
-                $flexFormService = GeneralUtility::makeInstance(FlexFormService::class);
+                
             }
 
             // assign all to view

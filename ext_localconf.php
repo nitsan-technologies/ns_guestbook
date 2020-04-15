@@ -4,7 +4,7 @@ if (!defined('TYPO3_MODE')) {
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'Nitsan.' . $_EXTKEY,
+	'Nitsan.ns_guestbook',
 	'Form',
 	array(
 		'Nsguestbook' => 'new',

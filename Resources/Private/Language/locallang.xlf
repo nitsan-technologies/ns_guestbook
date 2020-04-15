@@ -71,6 +71,9 @@
 			<trans-unit id="controller.insertError.msg">
 				<source>Please Insert following valid Information.</source>
 			</trans-unit>
+			<trans-unit id="controller.requireFields">
+				<source>Please fill the require(*) fields</source>
+			</trans-unit>
 			<!-- Controller msg -->
 
 			<!-- Latest file -->
@@ -183,6 +186,9 @@
 
 			<trans-unit id="require">
 				<source>* These fields are required.</source>
+			</trans-unit>
+			<trans-unit id="controller.mailfrmt">
+				<source>E-Mail format is not valid.</source>
 			</trans-unit>
 			<!-- Flex form labels -->
 		</body>

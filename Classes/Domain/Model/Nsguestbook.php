@@ -36,7 +36,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * name
      *
      * @var string
-     * @validate NotEmpty
+     * 
      */
     protected $name = '';
     
@@ -51,8 +51,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * email
      *
      * @var string
-     * @validate NotEmpty
-     * @validate EmailAddress
+     * 
      */
     protected $email = '';
     
