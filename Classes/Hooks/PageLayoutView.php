@@ -1,16 +1,13 @@
 <?php
 namespace Nitsan\NsGuestbook\Hooks;
 
-use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHookInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
-class PageLayoutView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHookInterface {
-
-    public function preProcess(\TYPO3\CMS\Backend\View\PageLayoutView &$parentObject, &$drawItem, &$headerContent, &$itemContent, array &$row) {
-
+class PageLayoutView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHookInterface
+{
+    public function preProcess(\TYPO3\CMS\Backend\View\PageLayoutView &$parentObject, &$drawItem, &$headerContent, &$itemContent, array &$row)
+    {
         $extKey = 'ns_guestbook';
         if ($row['CType'] == 'list' && $row['list_type'] == 'nsguestbook_form') {
             $drawItem = false;
@@ -19,15 +16,13 @@ class PageLayoutView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHo
             $view = $this->getFluidTemplate($extKey, 'GuestPreview');
 
             if (!empty($row['pi_flexform'])) {
-
-                if (version_compare(TYPO3_branch, '10.0', '>')) {                    
+                if (version_compare(TYPO3_branch, '10.0', '>')) {
                     $flexFormService = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Service\FlexFormService::class);
-                } else {                    
+                } else {
                     $flexFormService = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Service\FlexFormService::class);
                 }
 
                 /** @var FlexFormService $flexFormService */
-                
             }
 
             // assign all to view
@@ -39,7 +34,6 @@ class PageLayoutView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHo
             // return the preview
             $itemContent = $parentObject->linkEditContent($view->render(), $row);
         }
-
     }
 
     /**

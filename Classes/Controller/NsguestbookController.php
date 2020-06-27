@@ -50,14 +50,6 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     public function listAction()
     {
-        // Set pid
-        if ($this->settings['storagepage']) {
-            $pid = $this->settings['storagepage'];
-            $querySettings = $this->nsguestbookRepository->createQuery()->getQuerySettings();
-            $querySettings->setStoragePageIds(array($pid));
-            $this->nsguestbookRepository->setDefaultQuerySettings($querySettings);
-        }
-
         $nsguestbooks = $this->nsguestbookRepository->findSorted($this->settings);
         $this->view->assign('nsguestbooks', $nsguestbooks);
         $this->view->assign('settings', $this->settings);
@@ -70,12 +62,8 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     public function newAction()
     {
-        $sitekey = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_nsguestbook_form.']['persistence.']['sitekey'];
-
         $request = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_ns_guestbook_form'); // extname
         $this->view->assign('nsguestbookdata', $request['tx_nsguestbook_form']['newNsguestbook']);
-        $this->view->assign('sitekey', $sitekey);
-        $this->view->assign('settings', $this->settings);
     }
 
     /**
@@ -86,7 +74,6 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     public function createAction(\Nitsan\NsGuestbook\Domain\Model\Nsguestbook $newNsguestbook)
     {
-
         $settings = $this->settings;
         $error = 0;
         $mailerror = 0;
@@ -94,38 +81,46 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         if ($newNsguestbook->getName() == '' || $newNsguestbook->getEmail() == '') {
             $error = 1;
         }
-        if ($newNsguestbook->getEmail() != ''){
-            if(filter_var($newNsguestbook->getEmail(), FILTER_VALIDATE_EMAIL)) {          
-
+        if ($newNsguestbook->getEmail() != '') {
+            if (filter_var($newNsguestbook->getEmail(), FILTER_VALIDATE_EMAIL)) {
             } else {
                 $mailerror = 1;
             }
-        } 
+        }
 
         if (isset($_POST['g-recaptcha-response'])) {
             $captcha = $_POST['g-recaptcha-response'];
         }
         if (!$captcha && $settings['captcha'] == 0) {
-            $checkcaptchamsg = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('controller.checkcaptcha.msg',
-                'ns_guestbook');
+            $checkcaptchamsg = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                'controller.checkcaptcha.msg',
+                'ns_guestbook'
+            );
             $this->addFlashMessage($checkcaptchamsg, '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
             $this->redirect('new', 'Nsguestbook', 'ns_guestbook', $_REQUEST);
         } else {
-            $secretkey = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_nsguestbook_form.']['persistence.']['secretkey'];
-            $response = json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $secretkey . "&response=" . $captcha . "&remoteip=" . $_SERVER['REMOTE_ADDR']),
-                true);
+            $secretkey = $settings['secretkey'];
+            $response = json_decode(
+                file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secretkey . '&response=' . $captcha . '&remoteip=' . $_SERVER['REMOTE_ADDR']),
+                true
+            );
             if ($response['success'] == false && $settings['captcha'] == 0) {
-                $wrongcaptcha = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('controller.wrongcaptcha.msg',
-                    'ns_guestbook');
+                $wrongcaptcha = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    'controller.wrongcaptcha.msg',
+                    'ns_guestbook'
+                );
                 $this->addFlashMessage($wrongcaptcha, '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
             } else {
-
                 if ($error == 1) {
-                    $requireFields = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('controller.requireFields',
-                        'ns_guestbook');
+                    $requireFields = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                        'controller.requireFields',
+                        'ns_guestbook'
+                    );
 
-                    $mailfrmt = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('controller.mailfrmt',
-                        'ns_guestbook');
+                    $mailfrmt = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                        'controller.mailfrmt',
+                        'ns_guestbook'
+                    );
 
                     $this->addFlashMessage($requireFields, '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
 
@@ -137,14 +132,18 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                 }
 
                 if ($mailerror == 1) {
-                    $mailfrmt = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('controller.mailfrmt',
-                        'ns_guestbook');
+                    $mailfrmt = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                        'controller.mailfrmt',
+                        'ns_guestbook'
+                    );
                     $this->addFlashMessage($mailfrmt, '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
                     $this->redirect('new', 'Nsguestbook', 'ns_guestbook', $_REQUEST);
                 }
 
-                $thanksmsg = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('controller.thanks.msg',
-                    'ns_guestbook');
+                $thanksmsg = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    'controller.thanks.msg',
+                    'ns_guestbook'
+                );
 
                 $this->addFlashMessage($thanksmsg, '', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
                 if ($this->settings['autoaprrove']) {
@@ -158,43 +157,28 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                     $adminName = $this->settings['adminName'];
                     $adminEmail = $this->settings['adminEmail'];
 
-                    $confirmationContent = array(
+                    $confirmationContent = [
                         'adminName' => $adminName,
                         'name' => $newNsguestbook->getName(),
                         'city' => $newNsguestbook->getCity(),
                         'email' => $newNsguestbook->getEmail(),
                         'website' => $newNsguestbook->getWebsite(),
                         'message' => $newNsguestbook->getMessage(),
-                    );
+                    ];
                     $emailSubject = $this->settings['emailSubject'];
 
-                    $confirmationVariables = array('guest' => $confirmationContent);
-                    $sendSenderMail = $this->sendTemplateEmail(array($adminEmail => $adminName),
-                        array($adminEmail => $adminName), $emailSubject, 'MailTemplate', $confirmationVariables);
-
+                    $confirmationVariables = ['guest' => $confirmationContent];
+                    $sendSenderMail = $this->sendTemplateEmail(
+                        [$adminEmail => $adminName],
+                        [$adminEmail => $adminName],
+                        $emailSubject,
+                        'MailTemplate',
+                        $confirmationVariables
+                    );
                 }
-
             }
         }
         $this->redirect('new');
-    }
-
-    /**
-     * action latest
-     *
-     * @return void
-     */
-    public function latestAction()
-    {
-        // Set pid
-        $pid = $this->settings['storagepage'];
-        $querySettings = $this->nsguestbookRepository->createQuery()->getQuerySettings();
-        $querySettings->setStoragePageIds(array($pid));
-        $this->nsguestbookRepository->setDefaultQuerySettings($querySettings);
-
-        $nsguestbooks = $this->nsguestbookRepository->findLatestSorted($this->settings);
-        $this->view->assign('nsguestbooks', $nsguestbooks);
-        $this->view->assign('settings', $this->settings);
     }
 
     /**
@@ -209,7 +193,7 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         array $sender,
         $subject,
         $templateName,
-        array $variables = array()
+        array $variables = []
     ) {
 
         /** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailView */
@@ -250,14 +234,15 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * display no flash message at all on errors. Override this to customize
      * the flash message in your action controller.
      *
-     * @return string|boolean The flash message or FALSE if no flash message should be set
+     * @return string|bool The flash message or FALSE if no flash message should be set
      * @api
      */
     protected function getErrorFlashMessage()
     {
-        $errormsg = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('controller.insertError.msg',
-            'ns_guestbook');
+        $errormsg = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+            'controller.insertError.msg',
+            'ns_guestbook'
+        );
         return $errormsg;
     }
-
 }

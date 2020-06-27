@@ -1,20 +1,19 @@
 <?php
 if (!defined('TYPO3_MODE')) {
-	die('Access denied.');
+    die('Access denied.');
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'Nitsan.ns_guestbook',
-	'Form',
-	array(
-		'Nsguestbook' => 'new',
-		
-	),
-	// non-cacheable actions
-	array(
-		'Nsguestbook' => 'create',
-		
-	)
+    'Nitsan.ns_guestbook',
+    'Form',
+    [
+        'Nsguestbook' => 'list, new',
+    ],
+    // non-cacheable actions
+    [
+        'Nsguestbook' => 'create',
+
+    ]
 );
 
 if (version_compare(TYPO3_branch, '7.0', '>')) {

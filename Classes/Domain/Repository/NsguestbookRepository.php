@@ -31,34 +31,31 @@ namespace Nitsan\NsGuestbook\Domain\Repository;
  */
 class NsguestbookRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
+    public function findSorted($settings)
+    {
+        $query = $this->createQuery();
+        if ($settings['sorting']=='DESCENDING') {
+            $query->setOrderings(['crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING]);
+        } else {
+            $query->setOrderings(['crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING]);
+        }
+        if ($settings['totalnumber']) {
+            $query->setLimit((int)$settings['totalnumber']);
+        }
+        $query = $query->execute();
+        return $query;
+    }
 
-    public function findSorted($settings) {
+    public function findLatestSorted($settings)
+    {
+        $query = $this->createQuery();
 
-	    $query = $this->createQuery();	    
-	    if($settings['sorting']=='DESCENDING'){    	
-	    	$query->setOrderings(array("crdate" => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING));	
-	    }else{
-	    	$query->setOrderings(array("crdate" => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
-	    }
-	    if($settings['totalnumber']){
-	    	$query->setLimit((int)$settings['totalnumber']);
-	    }
-	    $query = $query->execute();	
-	    return $query;	    
-	}
+        $query->setOrderings(['crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING]);
 
-	public function findLatestSorted($settings) {
-
-	    $query = $this->createQuery();	    
-	    
-	    $query->setOrderings(array("crdate" => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING));
-	    
-	    if($settings['totalnumber']){
-	    	$query->setLimit((int)$settings['totalnumber']);
-	    }
-	    $query = $query->execute();	
-	    return $query;	    
-	}
-
-
+        if ($settings['totalnumber']) {
+            $query->setLimit((int)$settings['totalnumber']);
+        }
+        $query = $query->execute();
+        return $query;
+    }
 }

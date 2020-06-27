@@ -4,7 +4,7 @@
             <ROOT>
                 <TCEforms>
                     <sheetTitle>Function</sheetTitle>
-                </TCEforms>                
+                </TCEforms>
                 <type>array</type>
                 <el>
                     <switchableControllerActions>
@@ -15,24 +15,14 @@
                                 <type>select</type>
                                 <renderType>selectSingle</renderType>
                                 <items>
-                                    <numIndex index="0">
-                                        <numIndex index="0">
-                                            LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.selectMenu
-                                        </numIndex>
-                                        <numIndex index="1"></numIndex>
-                                    </numIndex>
                                     <numIndex index="1">
                                         <numIndex index="0">LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.disForm</numIndex>
                                         <numIndex index="1">Nsguestbook->new;Nsguestbook->create;</numIndex>
                                     </numIndex>
                                     <numIndex index="2">
-                                        <numIndex index="0">LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.disLtsList</numIndex>
-                                        <numIndex index="1">Nsguestbook->latest;Nsguestbook->show;</numIndex>
-                                    </numIndex>
-                                    <numIndex index="3">
                                         <numIndex index="0">LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.disList</numIndex>
                                         <numIndex index="1">Nsguestbook->list;Nsguestbook->show;</numIndex>
-                                    </numIndex>                                    
+                                    </numIndex>
                                 </items>
                             </config>
                         </TCEforms>
@@ -50,7 +40,7 @@
                     <settings.adminName>
                         <TCEforms>
                             <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.adminName</label>
-                            <displayCond>FIELD:switchableControllerActions:=:Nsguestbook->new;Nsguestbook->create;</displayCond>
+                            <displayCond>FIELD:switchableControllerActions:!=:Nsguestbook->list;Nsguestbook->show;</displayCond>
                             <config>
                                 <type>input</type>
                                 <size>40</size>
@@ -61,19 +51,18 @@
                     <settings.adminEmail>
                         <TCEforms>
                             <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.adminEmail</label>
-                            <displayCond>FIELD:switchableControllerActions:=:Nsguestbook->new;Nsguestbook->create;</displayCond>
+                            <displayCond>FIELD:switchableControllerActions:!=:Nsguestbook->list;Nsguestbook->show;</displayCond>
                             <config>
                                 <type>input</type>
-                                <renderType>inputLink</renderType>
-                                <size>20</size>
+                                <size>40</size>
+                                <eval>trim,required</eval>
                             </config>
                         </TCEforms>
                     </settings.adminEmail>
                     <settings.emailSubject>
                         <TCEforms>
-                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.emailSubject
-                            </label>
-                            <displayCond>FIELD:switchableControllerActions:=:Nsguestbook->new;Nsguestbook->create;</displayCond>
+                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.emailSubject</label>
+                            <displayCond>FIELD:switchableControllerActions:!=:Nsguestbook->list;Nsguestbook->show;</displayCond>
                             <config>
                                 <type>input</type>
                                 <size>40</size>
@@ -84,7 +73,7 @@
                     <settings.captcha>
                         <TCEforms>
                             <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.captcha</label>
-                            <displayCond>FIELD:switchableControllerActions:=:Nsguestbook->new;Nsguestbook->create;</displayCond>
+                            <displayCond>FIELD:switchableControllerActions:!=:Nsguestbook->list;Nsguestbook->show;</displayCond>
                             <config>
                                 <type>check</type>
                                 <default>1</default>
@@ -94,12 +83,7 @@
                     <settings.totalnumber>
                         <TCEforms>
                             <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.totalnumber</label>
-                            <displayCond>
-                                <OR>
-                                    <numIndex index="0">FIELD:switchableControllerActions:=:Nsguestbook->latest;Nsguestbook->show;</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:=:Nsguestbook->list;Nsguestbook->show;</numIndex>
-                                </OR>
-                            </displayCond>
+                            <displayCond>FIELD:switchableControllerActions:=:Nsguestbook->list;Nsguestbook->show;</displayCond>
                             <config>
                                 <type>input</type>
                                 <size>40</size>
@@ -131,52 +115,9 @@
                                 </items>
                             </config>
                         </TCEforms>
-                    </settings.sorting>                   
-                    <settings.newformpage>
-                        <TCEforms>
-                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.newformpage</label>
-                            <displayCond>
-                                <OR>
-                                    <numIndex index="0">FIELD:switchableControllerActions:=:Nsguestbook->latest;Nsguestbook->show;</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:=:Nsguestbook->list;Nsguestbook->show;</numIndex>
-                                </OR>
-                            </displayCond>
-                            <config>
-                                <type>input</type>
-                                <renderType>inputLink</renderType>
-                                <size>20</size>
-                            </config>
-                        </TCEforms>
-                    </settings.newformpage>
-                    <settings.storagepage>
-                        <TCEforms>
-                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.storagepage</label>
-                            <displayCond>
-                                <OR>
-                                    <numIndex index="0">FIELD:switchableControllerActions:=:Nsguestbook->latest;Nsguestbook->show;</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:=:Nsguestbook->list;Nsguestbook->show;</numIndex>
-                                </OR>
-                            </displayCond>
-                            <config>
-                                <type>input</type>
-                                <renderType>inputLink</renderType>
-                                <size>20</size>
-                            </config>
-                        </TCEforms>
-                    </settings.storagepage>
-                    <settings.backpage>
-                        <TCEforms>
-                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.backpage</label>
-                            <displayCond>FIELD:switchableControllerActions:=:Nsguestbook->latest;Nsguestbook->show;</displayCond>
-                            <config>
-                                <type>input</type>
-                                <renderType>inputLink</renderType>
-                                <size>20</size>
-                            </config>
-                        </TCEforms>
-                    </settings.backpage>
+                    </settings.sorting>
                 </el>
             </ROOT>
         </sDEF>
-    </sheets> 
+    </sheets>
 </T3DataStructure>
