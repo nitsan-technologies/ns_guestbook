@@ -1,4 +1,3 @@
-
 plugin.tx_nsguestbook_form {
 	view {
 		# cat=plugin.tx_nsguestbook_form/file; type=string; label=Path to template root (FE)
