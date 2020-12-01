@@ -6,8 +6,8 @@ plugin.tx_nsguestbook_form {
 	}
 	settings {
       autoaprrove = {$plugin.tx_nsguestbook_form.settings.autoaprrove}
-      sitekey = {$plugin.tx_nsguestbook_form.persistence.sitekey}
-      secretkey = {$plugin.tx_nsguestbook_form.persistence.secretkey}
+      sitekey = {$plugin.tx_nsguestbook_form.settings.sitekey}
+      secretkey = {$plugin.tx_nsguestbook_form.settings.secretkey}
 	}
 	mvc{
 		callDefaultActionIfActionCantBeResolved = 1
