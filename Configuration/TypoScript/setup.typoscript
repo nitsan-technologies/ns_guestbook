@@ -26,6 +26,8 @@ page {
         1000 = https://www.google.com/recaptcha/api.js
         1000.external= 1
         1005 = EXT:ns_guestbook/Resources/Public/ckeditor/ckeditor.js
+        1005.disableCompression = 1
+        1005.excludeFromConcatenation = 1
     }
     includeJSFooter {
         1010 = EXT:ns_guestbook/Resources/Public/js/custom.js
