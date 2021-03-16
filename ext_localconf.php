@@ -19,7 +19,7 @@ if (!defined('TYPO3_MODE')) {
 if (version_compare(TYPO3_branch, '7.0', '>')) {
     if (TYPO3_MODE === 'BE') {
         $icons = [
-            'ext-ns-guestbook-icon' => 'user_plugin_guestbook.svg',
+            'ext-ns-guestbook-icon' => 'ns_guestbook.svg',
         ];
         $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
         foreach ($icons as $identifier => $path) {
