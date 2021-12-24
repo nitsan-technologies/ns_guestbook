@@ -43,6 +43,17 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     protected $nsguestbookRepository = null;
 
+    /*
+     * Inject a NsGuestbook Repository
+     *
+     * @param \Nitsan\NsGuestbook\Domain\Repository\NsguestbookRepository $nsguestbookRepository
+     * @return void
+     */
+    public function injectNsGuestbookRepository(\Nitsan\NsGuestbook\Domain\Repository\NsguestbookRepository $nsguestbookRepository)
+    {
+        $this->nsguestbookRepository = $nsguestbookRepository;
+    }
+
     /**
      * action list
      *
