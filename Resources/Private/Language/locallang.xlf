@@ -191,6 +191,21 @@
 				<source>E-Mail format is not valid.</source>
 			</trans-unit>
 			<!-- Flex form labels -->
+			<trans-unit id="form.termsError">
+				<source>Please accept</source>
+			</trans-unit>
+			<trans-unit id="terms_required">
+				<source>Terms is required!</source>
+			</trans-unit>
+			<trans-unit id="terms.label">
+				<source>Terms</source>
+			</trans-unit>
+			<trans-unit id="terms.text">
+				<source><![CDATA[I accept the <a href="%s" target="_blank">terms</a>.]]></source>
+			</trans-unit>
+			<trans-unit id="readTerms">
+				<source>Read Terms</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

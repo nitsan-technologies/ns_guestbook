@@ -110,6 +110,12 @@
 			<trans-unit id="flexform.captcha">
 				<source>Disable Captcha</source>
 			</trans-unit>
+			<trans-unit id="termsRequired">
+				<source>Terms required</source>
+			</trans-unit>
+			<trans-unit id="termsTypolinkParameter">
+				<source>Terms typolink parameter</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

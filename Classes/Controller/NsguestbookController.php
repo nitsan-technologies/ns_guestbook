@@ -88,7 +88,10 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $settings = $this->settings;
         $error = 0;
         $mailerror = 0;
-
+        if($this->settings['termsRequired'] == '1' && $newNsguestbook->getTerms() == FALSE)
+        {
+            $error = 1;
+        }
         if ($newNsguestbook->getName() == '' || $newNsguestbook->getEmail() == '') {
             $error = 1;
         }

@@ -28,3 +28,12 @@
 	</label>
 	<f:form.textarea property="message" id="editor1" rows="10" cols="120" value="{nsguestbookdata.message}" />
 </div>
+<f:if condition="{settings.termsRequired}">
+	<div class="ns-form-group">
+		<label for="terms" class="ns-form-checkbox">
+			<f:translate key="terms.label" /> <span class="terms">*</span>
+			<f:form.checkbox property="terms" id="terms" value="1" />
+			<f:link.external uri="{settings.termsTypolinkParameter}" target="_blank"><f:translate key="readTerms" /></f:link.external>
+		</label>
+	</div>
+</f:if>

@@ -8,6 +8,8 @@ plugin.tx_nsguestbook_form {
       autoaprrove = {$plugin.tx_nsguestbook_form.settings.autoaprrove}
       sitekey = {$plugin.tx_nsguestbook_form.settings.sitekey}
       secretkey = {$plugin.tx_nsguestbook_form.settings.secretkey}
+      termsRequired = {$plugin.tx_nsguestbook_form.settings.termsRequired}
+	  termsTypolinkParameter = {$plugin.tx_nsguestbook_form.settings.termsTypolinkParameter}
 	}
 	mvc{
 		callDefaultActionIfActionCantBeResolved = 1
