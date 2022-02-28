@@ -3,6 +3,8 @@
 namespace Nitsan\NsGuestbook\Controller;
 
 use TYPO3\CMS\Extbase\Annotation\Inject as inject;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Page\AssetCollector;
 
 /***************************************************************
  *
@@ -74,6 +76,11 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     public function newAction()
     {
         $request = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_ns_guestbook_form'); // extname
+        if($this->settings['captcha'] == '0')
+        {
+            $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] .= "
+            <script src='https://www.google.com/recaptcha/api.js' type='text/javascript'></script>";
+        }
         $this->view->assign('nsguestbookdata', $request['tx_nsguestbook_form']['newNsguestbook']);
     }
 

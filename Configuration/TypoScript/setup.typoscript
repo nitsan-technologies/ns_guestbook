@@ -25,7 +25,6 @@ page {
         nsfjquery.if.isTrue = {$plugin.tx_nsguestbook_form.settings.jQuery}
     }
     includeJS {
-        1000 = https://www.google.com/recaptcha/api.js
         1000.external= 1
         1005 = EXT:ns_guestbook/Resources/Public/ckeditor/ckeditor.js
         1005.disableCompression = 1
