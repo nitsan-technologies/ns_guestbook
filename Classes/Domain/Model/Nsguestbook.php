@@ -70,6 +70,13 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $message = '';
 
     /**
+     * terms
+     *
+     * @var bool
+     */
+    protected $terms = false;
+
+    /**
      * tstamp
      *
      * @var int
@@ -193,6 +200,23 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setMessage($message)
     {
         $this->message = $message;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getTerms()
+    {
+        return $this->terms;
+    }
+
+    /**
+     * @param bool $terms
+     * @return void
+     */
+    public function setTerms($terms)
+    {
+        $this->terms = $terms;
     }
 
     /**

@@ -183,7 +183,6 @@
 			<trans-unit id="nsguestbook_latestmessages">
 				<source>Guestbook: Latest Messages</source>
 			</trans-unit>
-
 			<trans-unit id="require">
 				<source>* These fields are required.</source>
 			</trans-unit>
@@ -191,6 +190,15 @@
 				<source>E-Mail format is not valid.</source>
 			</trans-unit>
 			<!-- Flex form labels -->
+			<trans-unit id="terms">
+				<source>Terms</source>
+			</trans-unit>
+			<trans-unit id="readTerms">
+				<source>Terms and Conditions</source>
+			</trans-unit>
+			<trans-unit id="acceptTerms">
+				<source>I agree to the </source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

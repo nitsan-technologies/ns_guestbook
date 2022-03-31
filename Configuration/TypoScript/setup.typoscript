@@ -8,6 +8,8 @@ plugin.tx_nsguestbook_form {
       autoaprrove = {$plugin.tx_nsguestbook_form.settings.autoaprrove}
       sitekey = {$plugin.tx_nsguestbook_form.settings.sitekey}
       secretkey = {$plugin.tx_nsguestbook_form.settings.secretkey}
+      termsRequired = {$plugin.tx_nsguestbook_form.settings.termsRequired}
+	  termsTypolinkParameter = {$plugin.tx_nsguestbook_form.settings.termsTypolinkParameter}
 	}
 	mvc{
 		callDefaultActionIfActionCantBeResolved = 1
@@ -23,7 +25,6 @@ page {
         nsfjquery.if.isTrue = {$plugin.tx_nsguestbook_form.settings.jQuery}
     }
     includeJS {
-        1000 = https://www.google.com/recaptcha/api.js
         1000.external= 1
         1005 = EXT:ns_guestbook/Resources/Public/ckeditor/ckeditor.js
         1005.disableCompression = 1
