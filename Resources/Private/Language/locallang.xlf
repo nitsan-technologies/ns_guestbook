@@ -190,11 +190,14 @@
 				<source>E-Mail format is not valid.</source>
 			</trans-unit>
 			<!-- Flex form labels -->
+			<trans-unit id="terms">
+				<source>Terms</source>
+			</trans-unit>
 			<trans-unit id="readTerms">
-				<source>Read Terms and Conditions</source>
+				<source>Terms and Conditions</source>
 			</trans-unit>
 			<trans-unit id="acceptTerms">
-				<source>I agree to the Terms and Conditions</source>
+				<source>I agree to the </source>
 			</trans-unit>
 		</body>
 	</file>

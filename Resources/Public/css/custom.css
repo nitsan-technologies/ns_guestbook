@@ -631,3 +631,14 @@
 	}
 
 }
+.ns-form-group__condition {
+	display: flex;
+	width: 100%;
+	position: relative;
+	margin-top: 10px;
+}
+.ns-form-group__condition input[type='checkbox'] {
+	width: auto;
+	height: auto;
+	margin-right: 10px;
+}
