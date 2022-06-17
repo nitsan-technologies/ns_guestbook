@@ -44,7 +44,7 @@
                             <config>
                                 <type>input</type>
                                 <size>40</size>
-                                <eval>trim,required</eval>
+                                <eval>trim,email,required</eval>
                             </config>
                         </TCEforms>
                     </settings.adminName>
