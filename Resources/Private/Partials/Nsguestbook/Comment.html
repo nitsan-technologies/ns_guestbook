@@ -1,7 +1,16 @@
+{namespace grav=Nitsan\NsGuestbook\ViewHelpers}
 <div class="comment-main-level">
     <div class="comment-avatar">
         <div class="entry-author-info">
-            <span class="author-avatar"><f:image src="EXT:ns_guestbook/Resources/Public/Icons/person-default.png" width='32px' height='32px'/></span>
+            <f:variable name="url"><grav:gravatar emailAddress="{nsguestbook.email}" /></f:variable>
+            <f:if condition="{url}">
+                <f:then>
+                    <span class="author-avatar"><img src="{url}" /></span>
+                </f:then>
+                <f:else>
+                    <span class="author-avatar"><f:image src="EXT:ns_guestbook/Resources/Public/Icons/person-default.png" /></span>
+                </f:else>
+            </f:if>
         </div>
     </div>
 
