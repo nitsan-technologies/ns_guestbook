@@ -29,7 +29,7 @@
 .ns-form-group input, .ns-form-group textarea {
 	border-color: #a94442;
 }
-.ns-form-group input {
+.tx-ns-guestbook .ns-form-group input {
 	color: inherit;
 	font-size: 13px;
 	font-weight: 400;
