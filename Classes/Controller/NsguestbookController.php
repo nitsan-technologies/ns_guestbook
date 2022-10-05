@@ -81,6 +81,7 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
             $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] .= "
             <script src='https://www.google.com/recaptcha/api.js' type='text/javascript'></script>";
         }
+        $request['tx_nsguestbook_form']['newNsguestbook'] = isset($request['tx_nsguestbook_form']['newNsguestbook']) ? $request['tx_nsguestbook_form']['newNsguestbook'] : '';
         $this->view->assign('nsguestbookdata', $request['tx_nsguestbook_form']['newNsguestbook']);
     }
 
@@ -112,6 +113,7 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         if (isset($_POST['g-recaptcha-response'])) {
             $captcha = $_POST['g-recaptcha-response'];
         }
+        $captcha = isset($captcha) ? $captcha : '';
         if (!$captcha && $settings['captcha'] == 0) {
             $checkcaptchamsg = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                 'controller.checkcaptcha.msg',
@@ -189,13 +191,16 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                     $emailSubject = $this->settings['emailSubject'];
 
                     $confirmationVariables = ['guest' => $confirmationContent];
-                    $sendSenderMail = $this->sendTemplateEmail(
-                        [$adminEmail => $adminName],
-                        [$adminEmail => $adminName],
-                        $emailSubject,
-                        'MailTemplate',
-                        $confirmationVariables
-                    );
+
+                    if(filter_var($adminEmail, FILTER_VALIDATE_EMAIL) == TRUE){
+                        $sendSenderMail = $this->sendTemplateEmail(
+                            [$adminEmail => $adminName],
+                            [$adminEmail => $adminName],
+                            $emailSubject,
+                            'MailTemplate',
+                            $confirmationVariables
+                        );
+                    }
                 }
             }
         }
