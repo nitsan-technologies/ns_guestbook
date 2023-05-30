@@ -1,16 +1,27 @@
 <?php
-defined('TYPO3_MODE') or die();
+defined('TYPO3') or die();
 
 $_EXTKEY = 'ns_guestbook';
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'Nitsan.' . $_EXTKEY,
+    $_EXTKEY,
     'Form',
-    'Guestbook'
+    'Guestbook Form'
 );
 
-/* Flexform setting  */
-$pluginSignatureform = str_replace('_', '', $_EXTKEY) . '_' . 'form';
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignatureform] = 'recursive,select_key';
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignatureform] = 'pi_flexform';
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignatureform, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForm/flexform.xml');
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    $_EXTKEY,
+    'Message',
+    'Guestbook Message'
+);
+
+$pluginsPi = [
+    'nsguestbook_form' => 'Form.xml',
+    'nsguestbook_message'=>'Message.xml'
+];
+
+foreach ($pluginsPi as $listType => $pi_flexform) {
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$listType] = 'pi_flexform';
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($listType,'FILE:EXT:ns_guestbook/Configuration/FlexForms/'.$pi_flexform);
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$listType] = 'recursive,select_key,pages';
+}

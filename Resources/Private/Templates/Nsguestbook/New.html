@@ -7,7 +7,7 @@
 	</f:if>
 	<f:flashMessages />
 	<f:render partial="FormErrors" arguments="{object:Nsguestbook}" />
-	<f:form controller="Nsguestbook" id="guestBookForm" action="create"  name="newNsguestbook" object="{newNsguestbook}">
+	<f:form controller="Nsguestbook" id="guestBookForm" action="create"  name="newNsguestbook" object="{newNsguestbook}" extensionName="Nsguestbook" pluginName="Form">
 		<div class="ns-form-row">
 			<f:render partial="Nsguestbook/FormFields" arguments="{nsguestbookdata:nsguestbookdata}" />
 			<f:if condition="{settings.captcha}==0">

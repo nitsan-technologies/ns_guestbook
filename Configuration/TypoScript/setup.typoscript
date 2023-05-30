@@ -15,6 +15,7 @@ plugin.tx_nsguestbook_form {
 		callDefaultActionIfActionCantBeResolved = 1
 	}
 }
+plugin.tx_nsguestbook_message < plugin.tx_nsguestbook_form
 
 page {
     includeCSS {

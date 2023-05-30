@@ -42,6 +42,7 @@ class NsguestbookRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         if ($settings['totalnumber']) {
             $query->setLimit((int)$settings['totalnumber']);
         }
+        $query->getQuerySettings()->setRespectStoragePage(false);
         $query = $query->execute();
         return $query;
     }

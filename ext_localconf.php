@@ -1,39 +1,34 @@
 <?php
-if (!defined('TYPO3_MODE')) {
+if (!defined('TYPO3')) {
     die('Access denied.');
 }
 
-if (version_compare(TYPO3_branch, '10.0', '>=')) {
-    $moduleClass = \Nitsan\NsGuestbook\Controller\NsguestbookController::class;
-} else {
-    $moduleClass = 'Nsguestbook';
-}
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Nitsan.ns_guestbook',
+    'ns_guestbook',
     'Form',
     [
-        $moduleClass => 'list, new',
+        \Nitsan\NsGuestbook\Controller\NsguestbookController::class => 'new,create',
     ],
     // non-cacheable actions
     [
-        $moduleClass => 'create',
+        \Nitsan\NsGuestbook\Controller\NsguestbookController::class => 'create',
     ]
 );
 
-if (version_compare(TYPO3_branch, '7.0', '>')) {
-    if (TYPO3_MODE === 'BE') {
-        $icons = [
-            'ext-ns-guestbook-icon' => 'ns_guestbook.svg',
-        ];
-        $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
-        foreach ($icons as $identifier => $path) {
-            $iconRegistry->registerIcon(
-                $identifier,
-                \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-                ['source' => 'EXT:ns_guestbook/Resources/Public/Icons/' . $path]
-            );
-        }
-    }
-}
-
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['tt_content_drawItem']['ns_guestbook']= \Nitsan\NsGuestbook\Hooks\PageLayoutView::class;
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'ns_guestbook',
+    'Message',
+    [
+        \Nitsan\NsGuestbook\Controller\NsguestbookController::class => 'list',
+    ],
+    // non-cacheable actions
+    [
+        \Nitsan\NsGuestbook\Controller\NsguestbookController::class => 'list',
+    ]
+);
+$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
+$iconRegistry->registerIcon(
+    'ext-ns-guestbook-icon',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:ns_guestbook/Resources/Public/Icons/ns_guestbook.svg']
+);

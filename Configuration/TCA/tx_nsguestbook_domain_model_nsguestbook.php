@@ -1,9 +1,7 @@
 <?php
-if (version_compare(TYPO3_branch, '8.0', '>=')) {
-    $label = 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:';
-} else {
-    $label = 'LLL:EXT:lang/locallang_general.xlf:';
-}
+
+$label = 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:';
+
 $temp = [
     'ctrl' => [
         'title'	=> 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:tx_nsguestbook_domain_model_nsguestbook',
@@ -180,12 +178,5 @@ $temp = [
     ],
 ];
 
-if (version_compare(TYPO3_branch, '7.0', '<')) {
-    $temp['columns']['message']['config']['type'] = 'text';
-    $temp['columns']['message']['config']['cols'] = '80';
-    $temp['columns']['message']['config']['rows'] = '3';
-    $temp['columns']['message']['config']['softref'] = 'typolink_tag,images,email[subst],url';
-    $temp['columns']['message']['defaultExtras'] = 'richtext[]:rte_transform[mode=tx_examples_transformation-ts_css]';
-}
 
 return $temp;
