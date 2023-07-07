@@ -64,7 +64,7 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     public function listAction(): ResponseInterface
     {
-        $configuration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $configuration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         $this->pid = (int) $configuration['persistence']['storagePid'];
         $nsguestbooks = $this->nsguestbookRepository->findSorted($this->settings, $this->pid);
         $this->view->assign('nsguestbooks', $nsguestbooks);

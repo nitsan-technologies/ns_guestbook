@@ -1,29 +1,32 @@
 <?php
 
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use Nitsan\NsGuestbook\Controller\NsguestbookController;
+
 if (!defined('TYPO3')) {
     die('Access denied.');
 }
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+ExtensionUtility::configurePlugin(
     'ns_guestbook',
     'Form',
     [
-        \Nitsan\NsGuestbook\Controller\NsguestbookController::class => 'new,create',
+        NsguestbookController::class => 'new,create',
     ],
     // non-cacheable actions
     [
-        \Nitsan\NsGuestbook\Controller\NsguestbookController::class => 'create',
+        NsguestbookController::class => 'create',
     ]
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+ExtensionUtility::configurePlugin(
     'ns_guestbook',
     'Message',
     [
-        \Nitsan\NsGuestbook\Controller\NsguestbookController::class => 'list',
+        NsguestbookController::class => 'list',
     ],
     // non-cacheable actions
     [
-        \Nitsan\NsGuestbook\Controller\NsguestbookController::class => 'list',
+        NsguestbookController::class => 'list',
     ]
 );
