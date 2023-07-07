@@ -1,18 +1,24 @@
 <?php
+
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
 defined('TYPO3') or die();
 
 $_EXTKEY = 'ns_guestbook';
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     $_EXTKEY,
     'Form',
-    'Guestbook Form'
+    'Guestbook Form',
+    'ext-ns-guestbook-icon'
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     $_EXTKEY,
     'Message',
-    'Guestbook Message'
+    'Guestbook Message',
+    'ext-ns-guestbook-icon'
 );
 
 $pluginsPi = [
@@ -22,6 +28,8 @@ $pluginsPi = [
 
 foreach ($pluginsPi as $listType => $pi_flexform) {
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$listType] = 'pi_flexform';
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($listType,'FILE:EXT:ns_guestbook/Configuration/FlexForms/'.$pi_flexform);
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$listType] = 'recursive,select_key,pages';
+    ExtensionManagementUtility::addPiFlexFormValue($listType, 'FILE:EXT:ns_guestbook/Configuration/FlexForms/'.$pi_flexform);
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$listType] = 'recursive,select_key';
 }
+
+$GLOBALS['TCA']['tx_nsguestbook_domain_model_nsguestbook']['ctrl']['security']['ignorePageTypeRestriction'] = true;

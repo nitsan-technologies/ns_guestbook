@@ -1,11 +1,15 @@
 <?php
+
 namespace Nitsan\NsGuestbook\Domain\Repository;
+
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2018
+ *  (c) 2023
  *
  *  All rights reserved
  *
@@ -31,32 +35,25 @@ namespace Nitsan\NsGuestbook\Domain\Repository;
  */
 class NsguestbookRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-    public function findSorted($settings)
+    /**
+     * @param $settings
+     * @param $pageId
+     * @return array|QueryResultInterface
+     */
+    public function findSorted($settings, $pageId): array|QueryResultInterface
     {
         $query = $this->createQuery();
         if ($settings['sorting']=='DESCENDING') {
-            $query->setOrderings(['crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING]);
+            $query->setOrderings(['crdate' => QueryInterface::ORDER_DESCENDING]);
         } else {
-            $query->setOrderings(['crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING]);
+            $query->setOrderings(['crdate' => QueryInterface::ORDER_ASCENDING]);
         }
         if ($settings['totalnumber']) {
             $query->setLimit((int)$settings['totalnumber']);
         }
-        $query->getQuerySettings()->setRespectStoragePage(false);
-        $query = $query->execute();
-        return $query;
+        $query->getQuerySettings()->setRespectStoragePage($pageId);
+        return $query->execute();
     }
 
-    public function findLatestSorted($settings)
-    {
-        $query = $this->createQuery();
 
-        $query->setOrderings(['crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING]);
-
-        if ($settings['totalnumber']) {
-            $query->setLimit((int)$settings['totalnumber']);
-        }
-        $query = $query->execute();
-        return $query;
-    }
 }
