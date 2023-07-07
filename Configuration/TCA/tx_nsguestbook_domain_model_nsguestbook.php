@@ -177,6 +177,11 @@ $temp = [
                 'readOnly' => 1,
             ],
         ],
+        'tstamp' => [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
     ],
 ];
 
