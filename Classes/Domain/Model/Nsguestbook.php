@@ -81,7 +81,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var int
      */
-    protected $tstamp;
+    protected int $tstamp = 0;
 
     /**
      * hidden

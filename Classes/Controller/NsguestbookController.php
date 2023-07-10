@@ -50,7 +50,10 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     protected NsguestbookRepository $nsguestbookRepository;
 
-    public $pid = 0;
+    /**
+     * @var int
+     */
+    public int $pid = 0;
 
     public function __construct(NsguestbookRepository $nsguestbookRepository)
     {
@@ -110,17 +113,11 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         if ($newNsguestbook->getName() == '' || $newNsguestbook->getEmail() == '') {
             $error = 1;
         }
-        if ($newNsguestbook->getEmail() != '') {
-            if (filter_var($newNsguestbook->getEmail(), FILTER_VALIDATE_EMAIL)) {
-            } else {
-                $mailerror = 1;
-            }
+        if ($newNsguestbook->getEmail() != '' && !filter_var($newNsguestbook->getEmail(), FILTER_VALIDATE_EMAIL)) {
+            $mailerror = 1;
         }
 
-        if (isset($_POST['g-recaptcha-response'])) {
-            $captcha = $_POST['g-recaptcha-response'];
-        }
-        $captcha = $captcha ?? '';
+        $captcha = $this->request->getParsedBody()['g-recaptcha-response'] ?? '';
         if (!$captcha && $settings['captcha'] == 0) {
             $checkcaptchamsg = LocalizationUtility::translate(
                 'controller.checkcaptcha.msg',
@@ -254,24 +251,7 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         // HTML Email
         $message->html($emailBody);
 
-        $status = 0;
         $message->send();
         return $message->isSent();
-    }
-
-    /**
-     * A template method for displaying custom error flash messages, or to
-     * display no flash message at all on errors. Override this to customize
-     * the flash message in your action controller.
-     *
-     * @return string The flash message or FALSE if no flash message should be set
-     * @api
-     */
-    protected function getErrorFlashMessage(): string
-    {
-        return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-            'controller.insertError.msg',
-            'ns_guestbook'
-        );
     }
 }

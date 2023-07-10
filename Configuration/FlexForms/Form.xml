@@ -9,7 +9,7 @@
                 <el>
                     <settings.maintitle>
                         <TCEforms>
-                            <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.maintitle</label>
+                                 <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.maintitle</label>
                             <config>
                                 <type>input</type>
                                 <size>40</size>

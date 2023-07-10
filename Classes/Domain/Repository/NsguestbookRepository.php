@@ -36,11 +36,11 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 class NsguestbookRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
     /**
-     * @param $settings
-     * @param $pageId
+     * @param array $settings
+     * @param int $pageId
      * @return array|QueryResultInterface
      */
-    public function findSorted($settings, $pageId): array|QueryResultInterface
+    public function findSorted(array $settings, int $pageId): array|QueryResultInterface
     {
         $query = $this->createQuery();
         if ($settings['sorting']=='DESCENDING') {
