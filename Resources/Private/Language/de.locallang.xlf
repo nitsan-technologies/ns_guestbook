@@ -27,6 +27,9 @@
 			<trans-unit id="tx_nsguestbook_domain_model_nsguestbook.terms">
 				<target>AGB akzeptiert</target>
 			</trans-unit>
+			<trans-unit id="google_captcha_key_required">
+				<target>Fügen Sie bitte den Site-Schlüssel und den geheimen Schlüssel für Google Captcha aus der Erweiterungskonstante hinzu.</target>
+			</trans-unit>
 
 			<!-- Mail template -->
 			<trans-unit id="mail.title">

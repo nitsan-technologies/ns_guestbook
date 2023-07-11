@@ -10,19 +10,19 @@
         <div>
             <p><f:translate key="mail.hello" /> {guest.adminName}</p>
 
-            <p><f:translate key="mail.msg" /></p>
+            <p><f:translate key="mail.msg" extensionName="ns_guestbook" /></p>
 
-            <p><b><f:translate key="mail.Name" />:</b> {guest.name}</p>
-            <p><b><f:translate key="mail.City" />:</b> {guest.city}</p>
-            <p><b><f:translate key="mail.Email" />:</b> {guest.email}</p>
-            <p><b><f:translate key="mail.Website" />:</b> {guest.website}</p>
+            <p><b><f:translate key="mail.Name" extensionName="ns_guestbook" />:</b> {guest.name}</p>
+            <p><b><f:translate key="mail.City" extensionName="ns_guestbook" />:</b> {guest.city}</p>
+            <p><b><f:translate key="mail.Email" extensionName="ns_guestbook" />:</b> {guest.email}</p>
+            <p><b><f:translate key="mail.Website" extensionName="ns_guestbook" />:</b> {guest.website}</p>
             <p>
 	        	<b><f:translate key="mail.Message" />:</b>
             	<f:format.raw>{guest.message}</f:format.raw>
             </p>
             <br/>
             <br/>
-            <f:translate key="mail.regards" />
+            <f:translate key="mail.regards" extensionName="ns_guestbook" />
         </div>
     </div>
 </body>

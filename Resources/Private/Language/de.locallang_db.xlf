@@ -69,9 +69,12 @@
 			<trans-unit id="flexform.storagepage">
 				<target>Speicherseite auswählen</target>
 			</trans-unit>
-			<trans-unit id="be_lable">
-				<target>Nitsan Guestbook</target>
-			</trans-unit>			
+			<trans-unit id="be_lable_form">
+				<target>Nitsan Guestbook Form</target>
+			</trans-unit>
+			<trans-unit id="be_lable_message">
+				<target>Nitsan Guestbook Message</target>
+			</trans-unit>				
 			<trans-unit id="be_desctiption">
 				<target>Diese Erweiterung hilft Ihnen dabei, Bewertungen vom Gast zu sammeln.</target>
 			</trans-unit>

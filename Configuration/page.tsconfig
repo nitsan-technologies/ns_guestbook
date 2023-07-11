@@ -1,0 +1,25 @@
+mod.wizards.newContentElement.wizardItems.plugins {
+	elements {
+		NsGuestbookForm {
+			iconIdentifier = ext-ns-guestbook-icon
+			title = LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:be_lable_form
+			description = LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:be_desctiption
+			tt_content_defValues {
+				CType = list
+				list_type = nsguestbook_form
+			}
+		}
+		NsGuestbookMessage {
+			iconIdentifier = ext-ns-guestbook-icon
+			title = LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:be_lable_message
+			description = LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:be_desctiption
+			tt_content_defValues {
+				CType = list
+				list_type = nsguestbook_message
+			}
+		}
+	}
+	show = *
+}
+mod.web_layout.tt_content.preview.list.nsguestbook_form = EXT:ns_guestbook/Resources/Private/Backend/GuestPreview.html
+mod.web_layout.tt_content.preview.list.nsguestbook_message = EXT:ns_guestbook/Resources/Private/Backend/GuestPreview.html

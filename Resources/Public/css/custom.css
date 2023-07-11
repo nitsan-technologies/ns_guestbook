@@ -11,6 +11,15 @@
 	cursor: pointer;
 }
 
+.ns-form-group .error-msg-red {
+    display: inline-block;
+    font-weight: 600;
+    margin: 0 0 5px;
+    width: 100%;
+    font-family: inherit;
+    font-size: 14px;
+    color: red;
+}
 
 .typo3-messages li{
 	list-style: none;
