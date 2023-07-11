@@ -10,13 +10,22 @@
 	<f:form controller="Nsguestbook" id="guestBookForm" action="create"  name="newNsguestbook" object="{newNsguestbook}" extensionName="Nsguestbook" pluginName="Form">
 		<div class="ns-form-row">
 			<f:render partial="Nsguestbook/FormFields" arguments="{nsguestbookdata:nsguestbookdata}" />
-			<f:if condition="{settings.captcha}==0">
-				<div class="ns-form-group">
-					<div class="g-recaptcha" data-sitekey="{settings.sitekey}"></div>
-				</div>
-			</f:if>
 			<div class="ns-form-group">
-				<p class="text-muted"><f:translate key="require" /></p>
+			<f:if condition="{settings.captcha} == 0">
+				<f:then>
+					<f:if condition="{settings.sitekey} == '' || {settings.secretkey} == '' ">
+						<f:then>
+							<p class="error-msg-red"><f:translate key="google_captcha_key_required" extensionName="ns_guestbook"/></p>
+						</f:then>
+						<f:else>
+							<div class="g-recaptcha" data-sitekey="{settings.sitekey}"></div>
+						</f:else>
+					</f:if>
+				</f:then>	
+			</f:if>
+			</div>
+			<div class="ns-form-group">
+				<p class="text-muted"><f:translate key="require" extensionName="ns_guestbook"/></p>
 			</div>
 			<div class="ns-form-group">
 				<f:form.submit class="btn ns-btn submit" value="<f:translate key='new.create' />" />
@@ -24,4 +33,3 @@
 		</div>
 	</f:form>
 </f:section>
-
