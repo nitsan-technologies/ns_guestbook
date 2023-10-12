@@ -75,9 +75,9 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     public function newAction()
     {
-        $request = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_ns_guestbook_form'); // extname
-        if($this->settings['captcha'] == '0')
-        {
+        $request = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_ns_guestbook_form');
+        if($this->settings['captcha'] == '0') {
+            $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] = $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] ?? '';
             $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] .= "
             <script src='https://www.google.com/recaptcha/api.js' type='text/javascript'></script>";
         }

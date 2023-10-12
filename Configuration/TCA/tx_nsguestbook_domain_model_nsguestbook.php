@@ -70,7 +70,15 @@ $temp = [
                 'type' => 'passthrough',
             ],
         ],
-
+        'tstamp' => [
+            'exclude' => true,
+            'label' => 'tstamp',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputDateTime',
+                'eval' => 'datetime',
+            ],
+        ],
         't3ver_label' => [
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
             'config' => [
