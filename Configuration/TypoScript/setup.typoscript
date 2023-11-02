@@ -29,8 +29,42 @@ page {
         1005 = EXT:ns_guestbook/Resources/Public/ckeditor/ckeditor.js
         1005.disableCompression = 1
         1005.excludeFromConcatenation = 1
+        pagination = EXT:ns_guestbook/Resources/Public/js/pagination.js
     }
     includeJSFooter {
         1010 = EXT:ns_guestbook/Resources/Public/js/custom.js
+    }
+}
+
+listAction = PAGE
+listAction {
+    typeNum = 1698920884
+    config {
+        disableAllHeaderCode = 1
+        additionalHeaders = Content-type:application/json
+        xhtml_cleaning = 0
+        admPanel = 0
+    }
+
+    10 = USER
+    10 < styles.content.get
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = Nsguestbook
+        pluginName = Form
+        vendorName = Nitsan
+        controller = Nsguestbook
+        switchableControllerActions {
+            ProductArea {
+                1 = list
+            }
+        }
+
+        stdWrap.trim = 1
+        select {
+            where = list_type = "nsguestbook_form"
+        }
+
+        renderObj < tt_content.list.20.nsguestbook_form
     }
 }

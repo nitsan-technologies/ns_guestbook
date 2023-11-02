@@ -2,9 +2,11 @@
 
 namespace Nitsan\NsGuestbook\Controller;
 
-use TYPO3\CMS\Extbase\Annotation\Inject as inject;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Page\AssetCollector;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Pagination\SimplePagination;
+use TYPO3\CMS\Extbase\Annotation\Inject as inject;
+use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
 /***************************************************************
  *
@@ -64,8 +66,21 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     public function listAction()
     {
         $nsguestbooks = $this->nsguestbookRepository->findSorted($this->settings);
-        $this->view->assign('nsguestbooks', $nsguestbooks);
-        $this->view->assign('settings', $this->settings);
+        $currentPage = $this->request->hasArgument('currentPage')
+            ? (int)$this->request->getArgument('currentPage')
+            : 1;
+
+        $itemsPerPage = (int)$this->settings['totalnumber'];
+        $paginator = new QueryResultPaginator($nsguestbooks, $currentPage, $itemsPerPage);
+        $pagination = new SimplePagination($paginator);
+        $this->view->assignMultiple([
+            'pagination' => [
+                'pagination' => $pagination,
+                'paginator' => $paginator,
+            ],
+            'nsguestbooks' => $nsguestbooks,
+            'settings' => $this->settings,
+        ]);
     }
 
     /**
