@@ -25,6 +25,8 @@
             </div>
         </f:else>
     </f:if>
+    <f:if condition="{nsguestbooks-> f:count()} > {settings.totalnumber}">
+        <f:render partial="Nsguestbook/Pagination" arguments="{pagination: pagination.pagination, paginator: pagination.paginator, actionName: 'list'}" />
+    </f:if>
 
-    <f:render partial="Nsguestbook/Pagination" arguments="{pagination: pagination.pagination, paginator: pagination.paginator, actionName: 'list'}" />
 </f:section>

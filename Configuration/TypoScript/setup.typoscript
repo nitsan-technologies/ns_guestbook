@@ -29,10 +29,10 @@ page {
         1005 = EXT:ns_guestbook/Resources/Public/ckeditor/ckeditor.js
         1005.disableCompression = 1
         1005.excludeFromConcatenation = 1
-        pagination = EXT:ns_guestbook/Resources/Public/js/pagination.js
     }
     includeJSFooter {
         1010 = EXT:ns_guestbook/Resources/Public/js/custom.js
+        pagination = EXT:ns_guestbook/Resources/Public/js/pagination.js
     }
 }
 
