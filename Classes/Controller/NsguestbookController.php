@@ -71,6 +71,9 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
             : 1;
 
         $itemsPerPage = (int)$this->settings['totalnumber'];
+        if ($itemsPerPage < 1) {
+            $itemsPerPage = 5;
+        }
         $paginator = new QueryResultPaginator($nsguestbooks, $currentPage, $itemsPerPage);
         $pagination = new SimplePagination($paginator);
         $this->view->assignMultiple([
