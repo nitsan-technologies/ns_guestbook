@@ -2,6 +2,7 @@
 
 namespace Nitsan\NsGuestbook\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
@@ -33,14 +34,14 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 /**
  * The repository for Nsguestbooks
  */
-class NsguestbookRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class NsguestbookRepository extends Repository
 {
     /**
+     * findSorted
      * @param array $settings
-     * @param int $pageId
-     * @return array|QueryResultInterface
+     * @return QueryResultInterface|array
      */
-    public function findSorted(array $settings, int $pageId): array|QueryResultInterface
+    public function findSorted($settings)
     {
         $query = $this->createQuery();
         if ($settings['sorting']=='DESCENDING') {
@@ -48,10 +49,6 @@ class NsguestbookRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         } else {
             $query->setOrderings(['crdate' => QueryInterface::ORDER_ASCENDING]);
         }
-        if ($settings['totalnumber']) {
-            $query->setLimit((int)$settings['totalnumber']);
-        }
-        $query->getQuerySettings()->setRespectStoragePage($pageId);
         return $query->execute();
     }
 

@@ -4,12 +4,13 @@ namespace Nitsan\NsGuestbook\Controller;
 
 use TYPO3\CMS\Core\Mail\MailMessage;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Pagination\SimplePagination;
 use Nitsan\NsGuestbook\Domain\Model\Nsguestbook;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
+use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use Nitsan\NsGuestbook\Domain\Repository\NsguestbookRepository;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
@@ -67,11 +68,26 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     public function listAction(): ResponseInterface
     {
-        $configuration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-        $this->pid = (int) $configuration['persistence']['storagePid'];
-        $nsguestbooks = $this->nsguestbookRepository->findSorted($this->settings, $this->pid);
-        $this->view->assign('nsguestbooks', $nsguestbooks);
-        $this->view->assign('settings', $this->settings);
+        $nsguestbooks = $this->nsguestbookRepository->findSorted($this->settings);
+        $currentPage = $this->request->hasArgument('currentPage')
+            ? (int)$this->request->getArgument('currentPage')
+            : 1;
+
+        $itemsPerPage = (int)$this->settings['totalnumber'];
+        if ($itemsPerPage < 1) {
+            $itemsPerPage = 5;
+        }
+        $paginator = new QueryResultPaginator($nsguestbooks, $currentPage, $itemsPerPage);
+        $pagination = new SimplePagination($paginator);
+        $this->view->assignMultiple([
+            'pagination' => [
+                'pagination' => $pagination,
+                'paginator' => $paginator,
+            ],
+            'nsguestbooks' => $nsguestbooks,
+            'settings' => $this->settings,
+        ]);
+
         return $this->htmlResponse();
     }
 
@@ -98,8 +114,6 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      *
      * @param Nsguestbook $newNsguestbook
      * @return ResponseInterface
-     *
-     * @throws IllegalObjectTypeException
      */
     public function createAction(Nsguestbook $newNsguestbook): ResponseInterface
     {

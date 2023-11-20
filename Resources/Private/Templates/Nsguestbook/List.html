@@ -15,7 +15,7 @@
                 </div>
                 <div class="comments-container">
                     <ul class="comments-list" id="comments-list">
-                        <f:for each="{nsguestbooks}" as="nsguestbook">
+                        <f:for each="{pagination.paginator.paginatedItems}" as="nsguestbook">
                             <li id="comments-{nsguestbook.uid}">
                                 <f:render partial="Nsguestbook/Comment" arguments="{nsguestbook:nsguestbook}" />
                             </li>
@@ -29,5 +29,12 @@
                 <f:translate key="emptymsg" />
             </div>
         </f:else>
+    </f:if>
+    <f:variable name="nsguestbooksCount">{nsguestbooks -> f:count()}</f:variable>
+
+    <f:if condition="{nsguestbooksCount} > {settings.totalnumber}">
+        <f:then>
+            <f:render partial="Nsguestbook/Pagination" arguments="{pagination: pagination.pagination, paginator: pagination.paginator, actionName: 'list'}" />
+        </f:then>
     </f:if>
 </f:section>

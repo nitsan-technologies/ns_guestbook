@@ -98,6 +98,16 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Sets the tstamp
+     *
+     * @param \DateTime $tstamp
+     * @return void
+     */
+    public function setTstamp(\DateTime $tstamp) {
+        $this->tstamp = $tstamp;
+    }
+
+    /**
      * Returns the name
      *
      * @return string $name
