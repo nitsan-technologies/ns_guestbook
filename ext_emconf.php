@@ -1,17 +1,19 @@
 <?php
 
 $EM_CONF['ns_guestbook'] = [
-    'title' => '[NITSAN] Guestbook TYPO3 Plugin',
-    'description' => 'One of the only TYPO3 extension which provides to integrate all the features of Guestbook like review form with send mail, list of guest. Demo: https://demo.t3planet.com/t3t-extensions/guestbook/ You can download PRO version for more-features & free-support at https://t3planet.com/typo3-guestbook-extension/',
+    'title' => 'Guestbook',
+    'description' => 'TYPO3 Guestbook Extension easily integrates all the features of a guestbook, including a review form with email sending functionality. This TYPO3 guestbook plugin also includes spam protection and numerous customization options. Guests can share their reviews, ratings, and contact details, as well as personal experiences, through this Guestbook TYPO3 Extension. 
+    
+    *** Live-Demo: https://demo.t3planet.com/t3t-extensions/guestbook/ *** Documentation & Free Support: https://t3planet.com/typo3-guestbook-extension/',
     'category' => 'plugin',
-    'author' => 'Team NITSAN',
+    'author' => 'T3: Nilesh Malankiya, T3: Himanshu Ramavat, QA: Krishna Dhapa',
     'author_email' => 'sanjay@nitsan.in',
-    'author_company' => 'NITSAN Technologies Pvt Ltd',
+    'author_company' => 'T3Planet // NITSAN',
     'state' => 'stable',
     'internal' => '',
     'uploadfolder' => '0',
     'createDirs' => '',
-    'version' => '12.0.1',
+    'version' => '12.0.2',
     'constraints' => [
         'depends' => [
             'typo3' => '12.0.0-12.4.99',
