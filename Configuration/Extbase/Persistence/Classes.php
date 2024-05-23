@@ -1,8 +1,11 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
+use Nitsan\NsGuestbook\Domain\Model\Nsguestbook;
 
 return [
-    \Nitsan\NsGuestbook\Domain\Model\Nsguestbook::class => [
+    Nsguestbook::class => [
         'tableName' => 'tx_nsguestbook_domain_model_nsguestbook',
         'properties' => [
             'tstamp' => [

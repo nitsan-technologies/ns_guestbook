@@ -4,7 +4,7 @@
 		<header/>
 		<body>
 			<trans-unit id="tx_nsguestbook_domain_model_nsguestbook">
-				<target>Nitsan Gästebuch</target>
+				<target>Gästebuch</target>
 			</trans-unit>
 			<trans-unit id="tx_nsguestbook_domain_model_nsguestbook.name">
 				<target>Name</target>
@@ -70,10 +70,10 @@
 				<target>Speicherseite auswählen</target>
 			</trans-unit>
 			<trans-unit id="be_lable_form">
-				<target>Nitsan Guestbook Form</target>
+				<target>Guestbook Form</target>
 			</trans-unit>
 			<trans-unit id="be_lable_message">
-				<target>Nitsan Guestbook Message</target>
+				<target>Guestbook Message</target>
 			</trans-unit>				
 			<trans-unit id="be_desctiption">
 				<target>Diese Erweiterung hilft Ihnen dabei, Bewertungen vom Gast zu sammeln.</target>

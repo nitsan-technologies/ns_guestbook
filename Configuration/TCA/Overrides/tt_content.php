@@ -23,7 +23,7 @@ ExtensionUtility::registerPlugin(
 
 $pluginsPi = [
     'nsguestbook_form' => 'Form.xml',
-    'nsguestbook_message'=>'Message.xml'
+    'nsguestbook_message' => 'Message.xml'
 ];
 
 foreach ($pluginsPi as $listType => $pi_flexform) {

@@ -2,7 +2,9 @@
 
 defined('TYPO3') || die('Access denied.');
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 $extKey = 'ns_guestbook';
 
 // Adding fields to the tt_content table definition in TCA
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($extKey, 'Configuration/TypoScript', '[NITSAN] Guestbook');
+ExtensionManagementUtility::addStaticFile($extKey, 'Configuration/TypoScript', 'Guestbook');

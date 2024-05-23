@@ -44,7 +44,7 @@ class NsguestbookRepository extends Repository
     public function findSorted($settings)
     {
         $query = $this->createQuery();
-        if ($settings['sorting']=='DESCENDING') {
+        if ($settings['sorting'] == 'DESCENDING') {
             $query->setOrderings(['crdate' => QueryInterface::ORDER_DESCENDING]);
         } else {
             $query->setOrderings(['crdate' => QueryInterface::ORDER_ASCENDING]);
