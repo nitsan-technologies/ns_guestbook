@@ -1,4 +1,5 @@
 <?php
+
 namespace Nitsan\NsGuestbook\Domain\Repository;
 
 /***************************************************************
@@ -39,7 +40,7 @@ class NsguestbookRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     public function findSorted($settings)
     {
         $query = $this->createQuery();
-        if ($settings['sorting']=='DESCENDING') {
+        if ($settings['sorting'] == 'DESCENDING') {
             $query->setOrderings(['crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING]);
         } else {
             $query->setOrderings(['crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING]);

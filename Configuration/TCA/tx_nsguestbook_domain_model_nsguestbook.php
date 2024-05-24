@@ -1,4 +1,5 @@
 <?php
+
 if (version_compare(TYPO3_branch, '8.0', '>=')) {
     $label = 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:';
 } else {

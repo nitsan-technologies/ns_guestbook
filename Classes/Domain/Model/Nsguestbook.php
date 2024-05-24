@@ -1,37 +1,12 @@
 <?php
-namespace Nitsan\NsGuestbook\Domain\Model;
 
-/***************************************************************
- *
- *  Copyright notice
- *
- *  (c) 2018
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+namespace Nitsan\NsGuestbook\Domain\Model;
 
 /**
  * Nsguestbook
  */
 class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * name
      *
@@ -92,7 +67,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @return int $tstamp
      */
-    public function getTstamp()
+    public function getTstamp(): int
     {
         return $this->tstamp;
     }
@@ -103,7 +78,8 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \DateTime $tstamp
      * @return void
      */
-    public function setTstamp(\DateTime $tstamp) {
+    public function setTstamp(\DateTime $tstamp): void
+    {
         $this->tstamp = $tstamp;
     }
 
@@ -112,7 +88,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string $name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -123,7 +99,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $name
      * @return void
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -133,7 +109,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string $city
      */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->city;
     }
@@ -144,7 +120,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $city
      * @return void
      */
-    public function setCity($city)
+    public function setCity($city): void
     {
         $this->city = $city;
     }
@@ -154,7 +130,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string $email
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -165,7 +141,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $email
      * @return void
      */
-    public function setEmail($email)
+    public function setEmail($email): void
     {
         $this->email = $email;
     }
@@ -175,7 +151,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string $website
      */
-    public function getWebsite()
+    public function getWebsite(): string
     {
         return $this->website;
     }
@@ -186,7 +162,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $website
      * @return void
      */
-    public function setWebsite($website)
+    public function setWebsite($website): void
     {
         $this->website = $website;
     }
@@ -196,7 +172,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string $message
      */
-    public function getMessage()
+    public function getMessage(): string
     {
         return $this->message;
     }
@@ -207,7 +183,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $message
      * @return void
      */
-    public function setMessage($message)
+    public function setMessage($message): void
     {
         $this->message = $message;
     }
@@ -215,7 +191,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @return bool
      */
-    public function getTerms()
+    public function getTerms(): bool
     {
         return $this->terms;
     }
@@ -224,7 +200,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param bool $terms
      * @return void
      */
-    public function setTerms($terms)
+    public function setTerms($terms): void
     {
         $this->terms = $terms;
     }
@@ -232,7 +208,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @return int $hidden
      */
-    public function getHidden()
+    public function getHidden(): int
     {
         return $this->hidden;
     }
@@ -243,7 +219,7 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $hidden
      * @return void
      */
-    public function setHidden($hidden)
+    public function setHidden($hidden): void
     {
         $this->hidden = $hidden;
     }
