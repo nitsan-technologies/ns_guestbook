@@ -52,11 +52,6 @@ class NsguestbookController extends ActionController
      */
     protected NsguestbookRepository $nsguestbookRepository;
 
-    /**
-     * @var int
-     */
-    public int $pid = 0;
-
     public function __construct(NsguestbookRepository $nsguestbookRepository)
     {
         $this->nsguestbookRepository = $nsguestbookRepository;
