@@ -70,9 +70,7 @@ class NsguestbookController extends ActionController
             : 1;
 
         $itemsPerPage = (int)$this->settings['totalnumber'];
-        if ($itemsPerPage < 1) {
-            $itemsPerPage = 5;
-        }
+        $itemsPerPage = ($itemsPerPage < 1) ? 5 : $itemsPerPage;
         $paginator = new QueryResultPaginator($nsguestbooks, $currentPage, $itemsPerPage);
         $pagination = new SimplePagination($paginator);
         $this->view->assignMultiple([
@@ -123,7 +121,8 @@ class NsguestbookController extends ActionController
         if ($newNsguestbook->getName() == '' || $newNsguestbook->getEmail() == '') {
             $error = 1;
         }
-        if ($newNsguestbook->getEmail() != '' && !filter_var($newNsguestbook->getEmail(), FILTER_VALIDATE_EMAIL)) {
+      
+        if ($newNsguestbook->getEmail() != '' &&  !(GeneralUtility::validEmail($newNsguestbook->getEmail()))) {
             $mailerror = 1;
         }
 
