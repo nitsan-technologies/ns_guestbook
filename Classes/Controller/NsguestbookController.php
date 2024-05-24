@@ -2,9 +2,7 @@
 
 namespace Nitsan\NsGuestbook\Controller;
 
-use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Extbase\Annotation\Inject as inject;
-use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
 /**
  * NsguestbookController
@@ -29,7 +27,6 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     {
         $this->nsguestbookRepository = $nsguestbookRepository;
     }
-
     /**
      * action list
      *
@@ -37,36 +34,50 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     public function listAction()
     {
-        $nsguestbooks = $this->nsguestbookRepository->findSorted($this->settings);
         $currentPage = $this->request->hasArgument('currentPage')
             ? (int)$this->request->getArgument('currentPage')
             : 1;
 
         $itemsPerPage = (int)$this->settings['totalnumber'];
-        if ($itemsPerPage < 1) {
-            $itemsPerPage = 5;
-        }
-        $paginator = new QueryResultPaginator($nsguestbooks, $currentPage, $itemsPerPage);
-        $pagination = new SimplePagination($paginator);
+        $itemsPerPage = ($itemsPerPage < 1) ? 5 : $itemsPerPage;
+
+        $offset = ($currentPage - 1) * $itemsPerPage;
+
+        // Fetch the total number of items
+        $totalItems = $this->nsguestbookRepository->countAll();
+
+        // Fetch the items for the current page
+        $nsguestbooks = $this->nsguestbookRepository->findByPage($offset, $itemsPerPage);
+
+        // Calculate total pages
+        $totalPages = ceil($totalItems / $itemsPerPage);
+
+        // Build pagination data
+        $pagination = [
+            'currentPage' => $currentPage,
+            'totalPages' => $totalPages,
+            'prevPage' => $currentPage > 1 ? $currentPage - 1 : null,
+            'nextPage' => $currentPage < $totalPages ? $currentPage + 1 : null,
+            'pages' => range(1, $totalPages),
+        ];
+
         $this->view->assignMultiple([
-            'pagination' => [
-                'pagination' => $pagination,
-                'paginator' => $paginator,
-            ],
+            'pagination' => $pagination,
             'nsguestbooks' => $nsguestbooks,
             'settings' => $this->settings,
         ]);
     }
 
+
     /**
-     * action new
-     *
-     * @return void
-     */
+    * action new
+    *
+    * @return void
+    */
     public function newAction()
     {
         $request = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_ns_guestbook_form');
-        if($this->settings['captcha'] == '0') {
+        if ($this->settings['captcha'] == '0') {
             $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] = $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] ?? '';
             $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] .= "
             <script src='https://www.google.com/recaptcha/api.js' type='text/javascript'></script>";
@@ -86,7 +97,7 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $settings = $this->settings;
         $error = 0;
         $mailerror = 0;
-        if($this->settings['termsRequired'] == '1' && $newNsguestbook->getTerms() == false) {
+        if ($this->settings['termsRequired'] == '1' && $newNsguestbook->getTerms() == false) {
             $error = 1;
         }
         if ($newNsguestbook->getName() == '' || $newNsguestbook->getEmail() == '') {
@@ -181,8 +192,8 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
                     $confirmationVariables = ['guest' => $confirmationContent];
 
-                    if(filter_var($adminEmail, FILTER_VALIDATE_EMAIL) == true) {
-                      $this->sendTemplateEmail(
+                    if (filter_var($adminEmail, FILTER_VALIDATE_EMAIL) == true) {
+                        $this->sendTemplateEmail(
                             [$adminEmail => $adminName],
                             [$adminEmail => $adminName],
                             $emailSubject,
