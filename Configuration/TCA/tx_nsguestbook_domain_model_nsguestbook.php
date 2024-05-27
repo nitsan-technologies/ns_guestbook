@@ -118,7 +118,7 @@ $temp = [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
-                'required'=>true
+                'required' => true
             ],
         ],
         'city' => [
@@ -137,7 +137,7 @@ $temp = [
                 'type' => 'email',
                 'size' => 30,
                 'eval' => 'trim',
-                'required'=>true
+                'required' => true
 
             ],
         ],

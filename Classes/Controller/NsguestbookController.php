@@ -13,6 +13,7 @@ use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use Nitsan\NsGuestbook\Domain\Repository\NsguestbookRepository;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /***************************************************************
  *
@@ -42,7 +43,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 /**
  * NsguestbookController
  */
-class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class NsguestbookController extends ActionController
 {
     /**
      * nsguestbookRepository
@@ -50,11 +51,6 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @var NsguestbookRepository
      */
     protected NsguestbookRepository $nsguestbookRepository;
-
-    /**
-     * @var int
-     */
-    public int $pid = 0;
 
     public function __construct(NsguestbookRepository $nsguestbookRepository)
     {
@@ -74,9 +70,7 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
             : 1;
 
         $itemsPerPage = (int)$this->settings['totalnumber'];
-        if ($itemsPerPage < 1) {
-            $itemsPerPage = 5;
-        }
+        $itemsPerPage = ($itemsPerPage < 1) ? 5 : $itemsPerPage;
         $paginator = new QueryResultPaginator($nsguestbooks, $currentPage, $itemsPerPage);
         $pagination = new SimplePagination($paginator);
         $this->view->assignMultiple([
@@ -100,7 +94,7 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     {
         $request = $this->request->getQueryParams()['tx_nsguestbook_form'] ?? null;
         if($this->settings['captcha'] == '0') {
-            $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] =$GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] ?? '';
+            $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] = $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] ?? '';
             $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] .= "
             <script src='https://www.google.com/recaptcha/api.js' type='text/javascript'></script>";
         }
@@ -127,7 +121,8 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         if ($newNsguestbook->getName() == '' || $newNsguestbook->getEmail() == '') {
             $error = 1;
         }
-        if ($newNsguestbook->getEmail() != '' && !filter_var($newNsguestbook->getEmail(), FILTER_VALIDATE_EMAIL)) {
+      
+        if ($newNsguestbook->getEmail() != '' &&  !(GeneralUtility::validEmail($newNsguestbook->getEmail()))) {
             $mailerror = 1;
         }
 
@@ -211,7 +206,7 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                     $confirmationVariables = ['guest' => $confirmationContent];
 
                     if(filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
-                        $sendSenderMail = $this->sendTemplateEmail(
+                        $this->sendTemplateEmail(
                             [$adminEmail => $adminName],
                             [$adminEmail => $adminName],
                             $emailSubject,
@@ -244,7 +239,7 @@ class NsguestbookController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $emailView = GeneralUtility::makeInstance(StandaloneView::class);
 
         /*For use of Localize value */
-        $extensionName = $this->request->getControllerExtensionName();
+        $this->request->getControllerExtensionName();
         $emailView->setRequest($this->request);
 
         /*For use of Localize value */

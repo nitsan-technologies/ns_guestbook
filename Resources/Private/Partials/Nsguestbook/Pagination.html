@@ -15,9 +15,7 @@
             <f:if condition="{pagination.previousPageNumber} && {pagination.previousPageNumber} >= {pagination.firstPageNumber}">
                 <f:then>
                     <li class="page-item previous">
-                        <a  class="page-link paginate" href="{f:uri.action(action:actionName, pageType:1698920884, arguments:{currentPage: pagination.previousPageNumber})}" title="{f:translate(key:'pagination.previous')}">
-                            {f:translate(key:'widget.pagination.previous', extensionName: 'fluid')}
-                        </a>
+                        <a  class="page-link paginate" href="{f:uri.action(action:actionName, pageType:1698920884, arguments:{currentPage: pagination.previousPageNumber})}" title="{f:translate(key:'pagination.previous')}">Previous</a>
                     </li>
                 </f:then>
             </f:if>
@@ -44,9 +42,7 @@
             <f:if condition="{pagination.nextPageNumber} && {pagination.nextPageNumber} <= {pagination.lastPageNumber}">
                 <f:then>
                     <li class="page-item next">
-                        <a  class="page-link paginate" href="{f:uri.action(action:actionName, pageType:1698920884, arguments:{currentPage: pagination.nextPageNumber})}" title="{f:translate(key:'pagination.next')}">
-                            {f:translate(key:'widget.pagination.next', extensionName: 'fluid')}
-                        </a>
+                        <a  class="page-link paginate" href="{f:uri.action(action:actionName, pageType:1698920884, arguments:{currentPage: pagination.nextPageNumber})}" title="{f:translate(key:'pagination.next')}">Next</a>
                     </li>
                 </f:then>
             </f:if>

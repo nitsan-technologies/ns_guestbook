@@ -2,6 +2,8 @@
 
 namespace Nitsan\NsGuestbook\Domain\Model;
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -30,7 +32,7 @@ namespace Nitsan\NsGuestbook\Domain\Model;
 /**
  * Nsguestbook
  */
-class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Nsguestbook extends AbstractEntity
 {
     /**
      * name
@@ -103,7 +105,8 @@ class Nsguestbook extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \DateTime $tstamp
      * @return void
      */
-    public function setTstamp(\DateTime $tstamp) {
+    public function setTstamp(\DateTime $tstamp)
+    {
         $this->tstamp = $tstamp;
     }
 
