@@ -3,9 +3,7 @@
     <!-- Previous button -->
     <f:if condition="{pagination.prevPage}">
         <li class="page-item previous {f:if(condition: '{pagination.currentPage} == 1', then: 'disabled')}">
-            <a class="page-link paginate" href="{f:uri.action(action: actionName, arguments: {currentPage: pagination.prevPage})}" title="{f:translate(key: 'pagination.previous')}">
-                previous
-            </a>
+            <a class="page-link paginate" href="{f:uri.action(action: actionName, arguments: {currentPage: pagination.prevPage})}" title="{f:translate(key: 'pagination.previous')}">Previous</a>
         </li>
     </f:if>
 
@@ -19,9 +17,7 @@
     <!-- Next button -->
     <f:if condition="{pagination.nextPage}">
         <li class="page-item next {f:if(condition: '{pagination.currentPage} == {pagination.totalPages}', then: 'disabled')}">
-            <a class="page-link paginate" href="{f:uri.action(action: actionName, arguments: {currentPage: pagination.nextPage})}" title="{f:translate(key: 'pagination.next')}">
-                next
-            </a>
+            <a class="page-link paginate" href="{f:uri.action(action: actionName, arguments: {currentPage: pagination.nextPage})}" title="{f:translate(key: 'pagination.next')}">Next</a>
         </li>
     </f:if>
 

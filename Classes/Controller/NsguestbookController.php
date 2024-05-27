@@ -4,6 +4,7 @@ namespace Nitsan\NsGuestbook\Controller;
 
 use TYPO3\CMS\Extbase\Annotation\Inject as inject;
 
+
 /**
  * NsguestbookController
  */
