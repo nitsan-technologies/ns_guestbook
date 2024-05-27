@@ -1,7 +1,9 @@
 <f:layout name="Default" />
+
 <f:section name="main">
     <f:flashMessages />
     <h2>{settings.maintitle}</h2>
+    
     <f:if condition="{nsguestbooks}">
         <f:then>
             <div class="ns-news-comment-wrapper">
@@ -10,9 +12,9 @@
                 </div>
                 <div class="comments-container">
                     <ul class="comments-list" id="comments-list">
-                        <f:for each="{pagination.paginator.paginatedItems}" as="nsguestbook">
+                        <f:for each="{nsguestbooks}" as="nsguestbook">
                             <li id="comments-{nsguestbook.uid}">
-                                <f:render partial="Nsguestbook/Comment" arguments="{nsguestbook:nsguestbook}" />
+                                <f:render partial="Nsguestbook/Comment" arguments="{nsguestbook: nsguestbook}" />
                             </li>
                         </f:for>
                     </ul>
@@ -25,8 +27,8 @@
             </div>
         </f:else>
     </f:if>
-    <f:if condition="{nsguestbooks-> f:count()} > {settings.totalnumber}">
-        <f:render partial="Nsguestbook/Pagination" arguments="{pagination: pagination.pagination, paginator: pagination.paginator, actionName: 'list'}" />
-    </f:if>
 
+    <f:if condition="{pagination.totalPages} > 1">
+        <f:render partial="Nsguestbook/Pagination" arguments="{pagination: pagination, actionName: 'list'}" />
+    </f:if>
 </f:section>

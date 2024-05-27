@@ -4,7 +4,7 @@
 		<header/>
 		<body>
 			<trans-unit id="tx_nsguestbook_domain_model_nsguestbook">
-				<source>Nitsan Guestbook</source>
+				<source>Guestbook</source>
 			</trans-unit>
 			<trans-unit id="tx_nsguestbook_domain_model_nsguestbook.name">
 				<source>Name</source>
@@ -67,7 +67,7 @@
 				<source>Select Storage page</source>
 			</trans-unit>
 			<trans-unit id="be_lable">
-				<source>[NITSAN] Guestbook</source>
+				<source>Guestbook</source>
 			</trans-unit>			
 			<trans-unit id="be_desctiption">
 				<source>This extension will help you to collect review from guest.</source>
@@ -115,6 +115,18 @@
 			</trans-unit>
 			<trans-unit id="termsTypolinkParameter">
 				<source>Terms typolink parameter</source>
+			</trans-unit>
+			<trans-unit id="sitekeyCaptcha">
+				<source>Sitekey for captcha</source>
+			</trans-unit>
+			<trans-unit id="secretkeyCaptcha">
+				<source>Secretkey for captcha</source>
+			</trans-unit>
+			<trans-unit id="autoApprove">
+				<source>Set auto approve to new comment</source>
+			</trans-unit>
+			<trans-unit id="addjQuery">
+				<source>Add jQuery</source>
 			</trans-unit>
 		</body>
 	</file>

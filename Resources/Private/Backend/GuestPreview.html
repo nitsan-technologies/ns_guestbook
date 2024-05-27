@@ -9,7 +9,7 @@
 	<tr>
 		<th><f:translate key="LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xl:flexform.function" /></th><td><f:translate key="LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xl:flexform.{flexformData.switchableControllerActions}" /></td>
 	</tr>
-	<f:for each="{flexformData.settings}" as="previewData" key="previewKey">
+	<f:for each="{pi_flexform_transformed.settings}" as="previewData" key="previewKey">
         <f:if condition="{previewData}">
             <tr>
                 <th><f:translate key="LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xl:flexform.{previewKey}" /></th>

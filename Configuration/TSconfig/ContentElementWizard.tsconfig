@@ -14,3 +14,4 @@ mod.wizards.newContentElement.wizardItems.plugins {
 	show = *
 }
 
+mod.web_layout.tt_content.preview.list.nsguestbook_form = EXT:ns_guestbook/Resources/Private/Backend/GuestPreview.html
