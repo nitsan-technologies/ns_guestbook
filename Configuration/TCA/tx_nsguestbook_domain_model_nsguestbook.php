@@ -23,7 +23,7 @@ $temp = [
         'iconfile' => 'EXT:ns_guestbook/Resources/Public/Icons/tx_nsguestbook_domain_model_nsguestbook.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_diffsource, hidden1, name, city, email, website, message, terms, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_diffsource, hidden1, name, city, email, website, message, terms,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, hidden, starttime, endtime'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
@@ -68,45 +68,46 @@ $temp = [
 
         'hidden' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
+            'label' => 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:nsguestbook_domain_model_nsguestbook.hide',
             'config' => [
                 'type' => 'check',
             ],
         ],
+
         'starttime' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
+            'label' => 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:nsguestbook_domain_model_nsguestbook.startdate',
             'config' => [
                 'type' => 'input',
-                'datetime' => 'inputDateTime',
+                'renderType' => 'inputDateTime',
                 'size' => 13,
                 'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
-                'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ],
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
                 ],
-
+                'range' => [
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
+                ],
             ],
         ],
+
         'endtime' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
+            'label' => 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:nsguestbook_domain_model_nsguestbook.endddate',
             'config' => [
                 'type' => 'input',
-                'datetime' => 'inputDateTime',
+                'renderType' => 'inputDateTime',
                 'size' => 13,
                 'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
-                'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ],
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
+                ],
+                'range' => [
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
                 ],
             ],
         ],

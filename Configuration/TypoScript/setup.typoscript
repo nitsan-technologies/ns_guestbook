@@ -25,10 +25,16 @@ page {
         nsfjquery = EXT:ns_guestbook/Resources/Public/js/jquery-2.1.0.js
         nsfjquery.if.isTrue = {$plugin.tx_nsguestbook_form.settings.jQuery}
     }
-   
+   includeJS {
+        1000.external = 1
+        1005 {
+            file = EXT:ns_guestbook/Resources/Public/ckeditor/ckeditor.js
+            disableCompression = 1
+            excludeFromConcatenation = 1
+        }
+    }
     includeJSFooter {
         file = EXT:ns_guestbook/Resources/Public/ckeditor/ckeditor.js
-        1010 = EXT:ns_guestbook/Resources/Public/js/custom.js
         pagination = EXT:ns_guestbook/Resources/Public/js/pagination.js
     }
 }

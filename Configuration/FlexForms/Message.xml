@@ -24,7 +24,7 @@
                                 <type>input</type>
                                 <size>40</size>
                                 <default>5</default>
-                                <eval>trim,num</eval>
+                                <eval>trim,num,required</eval>
                             <range>
                                  <lower>1</lower>
                             </range>
