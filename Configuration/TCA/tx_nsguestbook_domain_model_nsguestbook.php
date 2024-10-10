@@ -27,6 +27,7 @@ $temp = [
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
+        'timeRestriction' => ['showitem' => 'starttime, endtime'],
     ],
     'columns' => [
 
@@ -68,7 +69,7 @@ $temp = [
 
         'hidden' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:nsguestbook_domain_model_nsguestbook.hide',
+            'label' => 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_csh_tx_nsguestbook_domain_model_nsguestbook.xlf:hide',
             'config' => [
                 'type' => 'check',
             ],
@@ -76,39 +77,29 @@ $temp = [
 
         'starttime' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:nsguestbook_domain_model_nsguestbook.startdate',
+            'label' => 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_csh_tx_nsguestbook_domain_model_nsguestbook:startdate',
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
-                'size' => 13,
-                'eval' => 'datetime',
-                'checkbox' => 0,
+                'eval' => 'datetime,int',
                 'default' => 0,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
-                ],
-                'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
-                ],
+                ]
             ],
         ],
 
         'endtime' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:nsguestbook_domain_model_nsguestbook.endddate',
+            'label' => 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_csh_tx_nsguestbook_domain_model_nsguestbook:endddate',
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
-                'size' => 13,
-                'eval' => 'datetime',
-                'checkbox' => 0,
+                'eval' => 'datetime,int',
                 'default' => 0,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
-                ],
-                'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
-                ],
+                ]
             ],
         ],
 
