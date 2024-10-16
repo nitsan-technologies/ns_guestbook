@@ -21,15 +21,7 @@
 			<trans-unit id="captcha.description">
 				<source>captcha</source>
 			</trans-unit>
-                        <trans-unit id="startdate">
-				<source>Start</source>
-			</trans-unit>
-			<trans-unit id="endddate">
-				<source>Stop</source>
-			</trans-unit>
-			<trans-unit id="hide">
-				<source>hide</source>
-			</trans-unit>
+
 		</body>
 	</file>
 </xliff>

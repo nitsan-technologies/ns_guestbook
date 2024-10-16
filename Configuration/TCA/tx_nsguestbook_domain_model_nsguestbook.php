@@ -69,7 +69,7 @@ $temp = [
 
         'hidden' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_csh_tx_nsguestbook_domain_model_nsguestbook.xlf:hide',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
             ],
@@ -77,11 +77,9 @@ $temp = [
 
         'starttime' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_csh_tx_nsguestbook_domain_model_nsguestbook:startdate',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'eval' => 'datetime,int',
+                'type' => 'datetime',
                 'default' => 0,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
@@ -91,15 +89,16 @@ $temp = [
 
         'endtime' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_csh_tx_nsguestbook_domain_model_nsguestbook:endddate',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'eval' => 'datetime,int',
+                'type' => 'datetime',
                 'default' => 0,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
-                ]
+                ],
+                'range' => [
+                    'upper' => mktime(0, 0, 0, 1, 1, 2038),
+                ],
             ],
         ],
 
