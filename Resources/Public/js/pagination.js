@@ -48,6 +48,15 @@ if (guestbook.length) {
 
         }
     }
-
-
 }
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('guestbookForm');
+    form.addEventListener('submit', function(event) {
+            // Find the submit button by class name
+            const submitButton = form.querySelector('.ns-btn.submit');
+            if (submitButton) {
+                    submitButton.disabled = true; 
+                    submitButton.value = 'Submitting...'; 
+            }
+    });
+});
