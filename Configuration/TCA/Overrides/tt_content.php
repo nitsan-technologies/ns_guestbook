@@ -11,14 +11,16 @@ ExtensionUtility::registerPlugin(
     $_EXTKEY,
     'Form',
     'Guestbook Form',
-    'ext-ns-guestbook-icon'
+    'ext-ns-guestbook-icon',
+    'plugins'
 );
 
 ExtensionUtility::registerPlugin(
     $_EXTKEY,
     'Message',
     'Guestbook Message',
-    'ext-ns-guestbook-icon'
+    'ext-ns-guestbook-icon',
+    'plugins'
 );
 
 $pluginsPi = [

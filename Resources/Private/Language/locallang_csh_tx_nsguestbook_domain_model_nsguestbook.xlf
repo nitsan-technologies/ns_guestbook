@@ -21,6 +21,7 @@
 			<trans-unit id="captcha.description">
 				<source>captcha</source>
 			</trans-unit>
+
 		</body>
 	</file>
 </xliff>

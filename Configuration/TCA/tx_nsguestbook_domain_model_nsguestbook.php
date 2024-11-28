@@ -23,10 +23,11 @@ $temp = [
         'iconfile' => 'EXT:ns_guestbook/Resources/Public/Icons/tx_nsguestbook_domain_model_nsguestbook.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_diffsource, hidden1, name, city, email, website, message, terms, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_diffsource, hidden1, name, city, email, website, message, terms,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, hidden, starttime, endtime'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
+        'timeRestriction' => ['showitem' => 'starttime, endtime'],
     ],
     'columns' => [
 
@@ -68,45 +69,35 @@ $temp = [
 
         'hidden' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
             ],
         ],
+
         'starttime' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config' => [
-                'type' => 'input',
-                'datetime' => 'inputDateTime',
-                'size' => 13,
-                'eval' => 'datetime',
-                'checkbox' => 0,
+                'type' => 'datetime',
                 'default' => 0,
-                'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ],
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
-                ],
-
+                ]
             ],
         ],
+
         'endtime' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config' => [
-                'type' => 'input',
-                'datetime' => 'inputDateTime',
-                'size' => 13,
-                'eval' => 'datetime',
-                'checkbox' => 0,
+                'type' => 'datetime',
                 'default' => 0,
-                'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ],
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
+                ],
+                'range' => [
+                    'upper' => mktime(0, 0, 0, 1, 1, 2038),
                 ],
             ],
         ],

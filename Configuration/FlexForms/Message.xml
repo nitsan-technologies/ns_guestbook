@@ -2,37 +2,37 @@
     <sheets>
         <sDEF>
             <ROOT>
-                <TCEforms>
+               
                     <sheetTitle>Function</sheetTitle>
-                </TCEforms>
+               
                 <type>array</type>
                 <el>
                     <settings.maintitle>
-                        <TCEforms>
+                       
                             <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.maintitle</label>
                             <config>
                                 <type>input</type>
                                 <size>40</size>
                                 <eval>trim</eval>
                             </config>
-                        </TCEforms>
+                       
                     </settings.maintitle>
                     <settings.totalnumber>
-                        <TCEforms>
+                      
                             <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.totalnumber</label>
                             <config>
                                 <type>input</type>
                                 <size>40</size>
                                 <default>5</default>
-                                <eval>trim,num</eval>
+                                <eval>trim,num,required</eval>
                             <range>
                                  <lower>1</lower>
                             </range>
                             </config>
-                        </TCEforms>
+                       
                     </settings.totalnumber>
                     <settings.sorting>
-                        <TCEforms>
+                       
                             <label>LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:flexform.sorting</label>
                             <config>
                                 <type>select</type>
@@ -52,7 +52,7 @@
                                     </numIndex>
                                 </items>
                             </config>
-                        </TCEforms>
+                        
                     </settings.sorting>
                 </el>
             </ROOT>

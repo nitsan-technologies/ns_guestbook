@@ -2,13 +2,13 @@
 	<label for="name">
 		<f:translate key="tx_nsguestbook_domain_model_nsguestbook.name" /> <span class="required">*</span>
 	</label>
-	<f:form.textfield property="name" value="{nsguestbookdata.name}" />
+	<f:form.textfield property="name" value="{nsguestbookdata.name}" required="true"/>
 </div>
 <div class="ns-form-group width-50">
 	<label for="email">
 		<f:translate key="tx_nsguestbook_domain_model_nsguestbook.email" /> <span class="email">*</span>
 	</label>
-	<f:form.textfield type="email" property="email" value="{nsguestbookdata.email}" />
+	<f:form.textfield type="email" property="email" value="{nsguestbookdata.email}" required="true" />
 </div>
 <div class="ns-form-group width-50">
 	<label for="website">
@@ -34,7 +34,7 @@
 			<f:translate key="terms" />
 		</label>
 		<div class="ns-form-group__condition">
-			<f:form.checkbox property="terms" id="terms" value="1" />
+			<f:form.checkbox property="terms" id="terms" value="1" required="true"/>
 			<f:translate key="acceptTerms" /><f:link.external uri="{settings.termsTypolinkParameter}" target="_blank"><f:translate key="readTerms" /></f:link.external><span class="terms">*</span>
 
 		</div>

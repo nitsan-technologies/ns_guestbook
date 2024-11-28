@@ -192,7 +192,7 @@ class NsguestbookController extends ActionController
                 if (!empty($this->settings['adminEmail'])) {
                     $adminName = $this->settings['adminName'];
                     $adminEmail = $this->settings['adminEmail'];
-
+            
                     $confirmationContent = [
                         'adminName' => $adminName,
                         'name' => $newNsguestbook->getName(),
@@ -201,14 +201,15 @@ class NsguestbookController extends ActionController
                         'website' => $newNsguestbook->getWebsite(),
                         'message' => $newNsguestbook->getMessage(),
                     ];
+            
                     $emailSubject = $this->settings['emailSubject'];
-
+            
                     $confirmationVariables = ['guest' => $confirmationContent];
-
+            
                     if(filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
                         $this->sendTemplateEmail(
-                            [$adminEmail => $adminName],
-                            [$adminEmail => $adminName],
+                            [$adminEmail => $adminName],  // Recipient: Admin
+                            [$newNsguestbook->getEmail() => $newNsguestbook->getName()], // Sender: Guestbook User
                             $emailSubject,
                             'MailTemplate',
                             $confirmationVariables
@@ -234,33 +235,34 @@ class NsguestbookController extends ActionController
         string $templateName,
         array  $variables = []
     ): bool {
-
+    
         /** @var StandaloneView $emailView */
         $emailView = GeneralUtility::makeInstance(StandaloneView::class);
-
-        /*For use of Localize value */
-        $this->request->getControllerExtensionName();
+    
+        // Setting up the request and localization
         $emailView->setRequest($this->request);
-
-        /*For use of Localize value */
+    
         $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-
         $templateRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPaths']['0']);
-
         $templatePathAndFilename = $templateRootPath . 'Email/' . $templateName . '.html';
-
+    
         $emailView->setTemplatePathAndFilename($templatePathAndFilename);
         $emailView->assignMultiple($variables);
-
+    
         $emailBody = $emailView->render();
-        /**@var $message MailMessage */
+    
+        /** @var $message MailMessage */
         $message = GeneralUtility::makeInstance(MailMessage::class);
-
-        $message->setTo($recipient)->setFrom($sender)->setSubject($subject);
-        // HTML Email
+    
+        $message->setTo($recipient)
+                ->setFrom($sender)  // Correct usage of the sender
+                ->setSubject($subject);
+    
+        // Send HTML Email
         $message->html($emailBody);
-
+    
         $message->send();
         return $message->isSent();
     }
+    
 }
