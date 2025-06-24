@@ -1,14 +1,13 @@
 <?php
 
 $EM_CONF['ns_guestbook'] = [
-    'title' => 'Guestbook',
-    'description' => 'TYPO3 Guestbook Extension easily integrates all the features of a guestbook, including a review form with email sending functionality. This TYPO3 guestbook plugin also includes spam protection and numerous customization options. Guests can share their reviews, ratings, and contact details, as well as personal experiences, through this Guestbook TYPO3 Extension. 
+    'title' => 'Advanced Guestbook for TYPO3',
+    'description' => 'Add a user-friendly guestbook to your TYPO3 website with customizable forms, spam protection, and email notifications. Let visitors leave reviews, ratings, and share experiences easily.',
     
-    *** Live-Demo: https://demo.t3planet.com/t3t-extensions/guestbook/ *** Documentation & Free Support: https://t3planet.com/typo3-guestbook-extension/',
     'category' => 'plugin',
-    'author' => 'T3: Nilesh Malankiya, T3: Himanshu Ramavat, QA: Krishna Dhapa',
-    'author_email' => 'sanjay@nitsan.in',
-    'author_company' => 'T3Planet // NITSAN',
+    'author' => 'Team T3Planet',
+    'author_email' => 'info@t3planet.de',
+    'author_company' => 'T3Planet',
     'state' => 'stable',
     'internal' => '',
     'uploadfolder' => '0',
