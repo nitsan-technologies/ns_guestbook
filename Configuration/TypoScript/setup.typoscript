@@ -1,21 +1,23 @@
-plugin.tx_nsguestbook_form {
-    view {
-        templateRootPaths.0 = {$plugin.tx_nsguestbook_form.view.templateRootPath}
-        partialRootPaths.0 = {$plugin.tx_nsguestbook_form.view.partialRootPath}
-        layoutRootPaths.0 = {$plugin.tx_nsguestbook_form.view.layoutRootPath}
+plugin {
+    tx_nsguestbook_form {
+        view {
+            templateRootPaths.0 = {$plugin.tx_nsguestbook_form.view.templateRootPath}
+            partialRootPaths.0 = {$plugin.tx_nsguestbook_form.view.partialRootPath}
+            layoutRootPaths.0 = {$plugin.tx_nsguestbook_form.view.layoutRootPath}
+        }
+        settings {
+            autoaprrove = {$plugin.tx_nsguestbook_form.settings.autoaprrove}
+            sitekey = {$plugin.tx_nsguestbook_form.settings.sitekey}
+            secretkey = {$plugin.tx_nsguestbook_form.settings.secretkey}
+            termsRequired = {$plugin.tx_nsguestbook_form.settings.termsRequired}
+            termsTypolinkParameter = {$plugin.tx_nsguestbook_form.settings.termsTypolinkParameter}
+        }
+        mvc {
+            callDefaultActionIfActionCantBeResolved = 1
+        }
     }
-    settings {
-        autoaprrove = {$plugin.tx_nsguestbook_form.settings.autoaprrove}
-        sitekey = {$plugin.tx_nsguestbook_form.settings.sitekey}
-        secretkey = {$plugin.tx_nsguestbook_form.settings.secretkey}
-        termsRequired = {$plugin.tx_nsguestbook_form.settings.termsRequired}
-        termsTypolinkParameter = {$plugin.tx_nsguestbook_form.settings.termsTypolinkParameter}
-    }
-    mvc {
-        callDefaultActionIfActionCantBeResolved = 1
-    }
+    tx_nsguestbook_message < plugin.tx_nsguestbook_form
 }
-plugin.tx_nsguestbook_message < plugin.tx_nsguestbook_form
 
 page {
     includeCSS {
@@ -25,7 +27,7 @@ page {
         nsfjquery = EXT:ns_guestbook/Resources/Public/js/jquery-2.1.0.js
         nsfjquery.if.isTrue = {$plugin.tx_nsguestbook_form.settings.jQuery}
     }
-   includeJS {
+    includeJS {
         1000.external = 1
         1005 {
             file = EXT:ns_guestbook/Resources/Public/ckeditor/ckeditor.js

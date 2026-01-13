@@ -14,6 +14,12 @@ use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use Nitsan\NsGuestbook\Domain\Repository\NsguestbookRepository;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
+use TYPO3\CMS\Core\View\ViewInterface;
+use TYPO3\CMS\Core\View\ViewFactoryData;
+use TYPO3\CMS\Core\Mail\MailerInterface;
 
 /***************************************************************
  *
@@ -94,9 +100,17 @@ class NsguestbookController extends ActionController
     {
         $request = $this->request->getQueryParams()['tx_nsguestbook_form'] ?? null;
         if($this->settings['captcha'] == '0') {
-            $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] = $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] ?? '';
-            $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] .= "
-            <script src='https://www.google.com/recaptcha/api.js' type='text/javascript'></script>";
+            $versionNumber =  VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
+            if ($versionNumber['version_main'] <= '13') {
+                // @extensionScannerIgnoreLine
+                $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] = $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] ?? '';
+                // @extensionScannerIgnoreLine
+                $GLOBALS['TSFE']->additionalFooterData[$this->request->getControllerExtensionKey()] .= "
+                <script src='https://www.google.com/recaptcha/api.js' type='text/javascript'></script>";
+            } else {
+                $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
+                $pageRenderer->addFooterData("<script src='https://www.google.com/recaptcha/api.js' type='text/javascript'></script>");
+            }
         }
         $request['newNsguestbook'] = $request['newNsguestbook'] ?? '';
         $this->view->assign('nsguestbookdata', $request['newNsguestbook']);
@@ -111,7 +125,6 @@ class NsguestbookController extends ActionController
      */
     public function createAction(Nsguestbook $newNsguestbook): ResponseInterface
     {
-
         $settings = $this->settings;
         $error = 0;
         $mailerror = 0;
@@ -207,13 +220,24 @@ class NsguestbookController extends ActionController
                     $confirmationVariables = ['guest' => $confirmationContent];
             
                     if(filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
-                        $this->sendTemplateEmail(
-                            [$adminEmail => $adminName],  // Recipient: Admin
-                            [$newNsguestbook->getEmail() => $newNsguestbook->getName()], // Sender: Guestbook User
-                            $emailSubject,
-                            'MailTemplate',
-                            $confirmationVariables
-                        );
+                        $versionNumber =  VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
+                        if ($versionNumber['version_main'] <= '13') {
+                            $this->sendTemplateEmailOld(
+                                [$adminEmail => $adminName],  // Recipient: Admin
+                                [$newNsguestbook->getEmail() => $newNsguestbook->getName()], // Sender: Guestbook User
+                                $emailSubject,
+                                'MailTemplate',
+                                $confirmationVariables
+                            );
+                        } else {
+                            $this->sendTemplateEmailNew(
+                                [$adminEmail => $adminName],  // Recipient: Admin
+                                [$newNsguestbook->getEmail() => $newNsguestbook->getName()], // Sender: Guestbook User
+                                $emailSubject,
+                                'MailTemplate',
+                                $confirmationVariables
+                            );
+                        }
                     }
                 }
             }
@@ -228,7 +252,7 @@ class NsguestbookController extends ActionController
      * @param string $templateName template name (UpperCamelCase)
      * @param array $variables variables to be passed to the Fluid view
      */
-    protected function sendTemplateEmail(
+    protected function sendTemplateEmailOld(
         array  $recipient,
         array  $sender,
         string $subject,
@@ -237,6 +261,7 @@ class NsguestbookController extends ActionController
     ): bool {
     
         /** @var StandaloneView $emailView */
+        // @extensionScannerIgnoreLine
         $emailView = GeneralUtility::makeInstance(StandaloneView::class);
     
         // Setting up the request and localization
@@ -255,14 +280,54 @@ class NsguestbookController extends ActionController
         $message = GeneralUtility::makeInstance(MailMessage::class);
     
         $message->setTo($recipient)
-                ->setFrom($sender)  // Correct usage of the sender
-                ->setSubject($subject);
-    
-        // Send HTML Email
-        $message->html($emailBody);
+                ->setFrom($sender)
+                ->setSubject($subject)
+                ->html($emailBody);
     
         $message->send();
         return $message->isSent();
     }
-    
+
+    protected function sendTemplateEmailNew(
+        array  $recipient,
+        array  $sender,
+        string $subject,
+        string $templateName,
+        array  $variables = []
+    ): bool {
+        $viewFactory = GeneralUtility::makeInstance(ViewFactoryInterface::class);
+        
+        // Get the base Templates directory, NOT the specific file
+        $frameworkConfiguration = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+        );
+        $templateRootPaths = $frameworkConfiguration['view']['templateRootPaths'];
+
+        // Initialize ViewFactoryData with root paths and the current request
+        $viewFactoryData = new ViewFactoryData(
+            request: $this->request,
+            templateRootPaths: $templateRootPaths,
+            partialRootPaths: $frameworkConfiguration['view']['partialRootPaths'] ?? [],
+            layoutRootPaths: $frameworkConfiguration['view']['layoutRootPaths'] ?? [],
+        );
+
+        $view = $viewFactory->create($viewFactoryData);
+        $view->assignMultiple($variables);
+
+        // Specify the template relative to the root (e.g., 'Email/MailTemplate')
+        // Do not include the .html extension here
+        $emailBody = $view->render('Email/' . $templateName);
+
+        /** @var MailMessage $message */
+        $message = GeneralUtility::makeInstance(MailMessage::class);
+        $message
+            ->setTo($recipient)
+            ->setFrom($sender)
+            ->setSubject($subject)
+            ->html($emailBody);
+
+        $mailer = GeneralUtility::makeInstance(MailerInterface::class);
+        $mailer->send($message);
+        return true;
+    }
 }

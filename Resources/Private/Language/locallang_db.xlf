@@ -72,7 +72,7 @@
 			<trans-unit id="be_lable_message">
 				<source>Guestbook Message</source>
 			</trans-unit>				
-			<trans-unit id="be_desctiption">
+			<trans-unit id="be_description">
 				<source>This extension will help you to collect review from guest.</source>
 			</trans-unit>
 			<trans-unit id="flexform.select">

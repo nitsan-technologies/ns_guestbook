@@ -3,7 +3,7 @@ mod.wizards.newContentElement.wizardItems.plugins {
 		nsguestbook_form {
 			iconIdentifier = ext-ns-guestbook-icon
 			title = LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:be_lable_form
-			description = LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:be_desctiption
+			description = LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:be_description
 			tt_content_defValues {
 				CType = list
 				list_type = nsguestbook_form
@@ -12,7 +12,7 @@ mod.wizards.newContentElement.wizardItems.plugins {
 		nsguestbook_message {
 			iconIdentifier = ext-ns-guestbook-icon
 			title = LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:be_lable_message
-			description = LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:be_desctiption
+			description = LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:be_description
 			tt_content_defValues {
 				CType = list
 				list_type = nsguestbook_message

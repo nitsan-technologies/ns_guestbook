@@ -3,13 +3,18 @@
 namespace Nitsan\NsGuestbook\ViewHelpers;
 
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 class GravatarViewHelper extends AbstractTagBasedViewHelper
 {
     public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerUniversalTagAttributes();
+        $versionNumber =  VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
+        if ($versionNumber['version_main'] <= '13') {
+            // @extensionScannerIgnoreLine
+            $this->registerUniversalTagAttributes();
+        }
         $this->registerArgument('emailAddress', 'string', 'The email address to resolve the gravatar for', true);
     }
 
