@@ -17,7 +17,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Core\View\ViewFactoryInterface;
-use TYPO3\CMS\Core\View\ViewInterface;
 use TYPO3\CMS\Core\View\ViewFactoryData;
 use TYPO3\CMS\Core\Mail\MailerInterface;
 
@@ -220,24 +219,13 @@ class NsguestbookController extends ActionController
                     $confirmationVariables = ['guest' => $confirmationContent];
             
                     if(filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
-                        $versionNumber =  VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
-                        if ($versionNumber['version_main'] <= '13') {
-                            $this->sendTemplateEmailOld(
-                                [$adminEmail => $adminName],  // Recipient: Admin
-                                [$newNsguestbook->getEmail() => $newNsguestbook->getName()], // Sender: Guestbook User
-                                $emailSubject,
-                                'MailTemplate',
-                                $confirmationVariables
-                            );
-                        } else {
-                            $this->sendTemplateEmailNew(
-                                [$adminEmail => $adminName],  // Recipient: Admin
-                                [$newNsguestbook->getEmail() => $newNsguestbook->getName()], // Sender: Guestbook User
-                                $emailSubject,
-                                'MailTemplate',
-                                $confirmationVariables
-                            );
-                        }
+                        $this->sendTemplateEmail(
+                            [$adminEmail => $adminName],  // Recipient: Admin
+                            [$newNsguestbook->getEmail() => $newNsguestbook->getName()], // Sender: Guestbook User
+                            $emailSubject,
+                            'MailTemplate',
+                            $confirmationVariables
+                        );
                     }
                 }
             }
@@ -252,30 +240,54 @@ class NsguestbookController extends ActionController
      * @param string $templateName template name (UpperCamelCase)
      * @param array $variables variables to be passed to the Fluid view
      */
-    protected function sendTemplateEmailOld(
+    protected function sendTemplateEmail(
         array  $recipient,
         array  $sender,
         string $subject,
         string $templateName,
         array  $variables = []
     ): bool {
-    
-        /** @var StandaloneView $emailView */
-        // @extensionScannerIgnoreLine
-        $emailView = GeneralUtility::makeInstance(StandaloneView::class);
-    
-        // Setting up the request and localization
-        $emailView->setRequest($this->request);
-    
-        $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-        $templateRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPaths']['0']);
-        $templatePathAndFilename = $templateRootPath . 'Email/' . $templateName . '.html';
-    
-        $emailView->setTemplatePathAndFilename($templatePathAndFilename);
-        $emailView->assignMultiple($variables);
-    
-        $emailBody = $emailView->render();
-    
+        $versionNumber =  VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
+        if ($versionNumber['version_main'] <= '13') {
+            /** @var StandaloneView $emailView */
+            // @extensionScannerIgnoreLine
+            $emailView = GeneralUtility::makeInstance(StandaloneView::class);
+        
+            // Setting up the request and localization
+            $emailView->setRequest($this->request);
+        
+            $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+            $templateRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPaths']['0']);
+            $templatePathAndFilename = $templateRootPath . 'Email/' . $templateName . '.html';
+        
+            $emailView->setTemplatePathAndFilename($templatePathAndFilename);
+            $emailView->assignMultiple($variables);
+        
+            $emailBody = $emailView->render();
+        } else {
+            $viewFactory = GeneralUtility::makeInstance(ViewFactoryInterface::class);
+        
+            // Get the base Templates directory, NOT the specific file
+            $frameworkConfiguration = $this->configurationManager->getConfiguration(
+                ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+            );
+            $templateRootPaths = $frameworkConfiguration['view']['templateRootPaths'];
+
+            // Initialize ViewFactoryData with root paths and the current request
+            $viewFactoryData = new ViewFactoryData(
+                request: $this->request,
+                templateRootPaths: $templateRootPaths,
+                partialRootPaths: $frameworkConfiguration['view']['partialRootPaths'] ?? [],
+                layoutRootPaths: $frameworkConfiguration['view']['layoutRootPaths'] ?? [],
+            );
+
+            $emailView = $viewFactory->create($viewFactoryData);
+            $emailView->assignMultiple($variables);
+
+            // Specify the template relative to the root (e.g., 'Email/MailTemplate')
+            // Do not include the .html extension here
+            $emailBody = $emailView->render('Email/' . $templateName);
+        }
         /** @var $message MailMessage */
         $message = GeneralUtility::makeInstance(MailMessage::class);
     
@@ -283,48 +295,6 @@ class NsguestbookController extends ActionController
                 ->setFrom($sender)
                 ->setSubject($subject)
                 ->html($emailBody);
-    
-        $message->send();
-        return $message->isSent();
-    }
-
-    protected function sendTemplateEmailNew(
-        array  $recipient,
-        array  $sender,
-        string $subject,
-        string $templateName,
-        array  $variables = []
-    ): bool {
-        $viewFactory = GeneralUtility::makeInstance(ViewFactoryInterface::class);
-        
-        // Get the base Templates directory, NOT the specific file
-        $frameworkConfiguration = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
-        );
-        $templateRootPaths = $frameworkConfiguration['view']['templateRootPaths'];
-
-        // Initialize ViewFactoryData with root paths and the current request
-        $viewFactoryData = new ViewFactoryData(
-            request: $this->request,
-            templateRootPaths: $templateRootPaths,
-            partialRootPaths: $frameworkConfiguration['view']['partialRootPaths'] ?? [],
-            layoutRootPaths: $frameworkConfiguration['view']['layoutRootPaths'] ?? [],
-        );
-
-        $view = $viewFactory->create($viewFactoryData);
-        $view->assignMultiple($variables);
-
-        // Specify the template relative to the root (e.g., 'Email/MailTemplate')
-        // Do not include the .html extension here
-        $emailBody = $view->render('Email/' . $templateName);
-
-        /** @var MailMessage $message */
-        $message = GeneralUtility::makeInstance(MailMessage::class);
-        $message
-            ->setTo($recipient)
-            ->setFrom($sender)
-            ->setSubject($subject)
-            ->html($emailBody);
 
         $mailer = GeneralUtility::makeInstance(MailerInterface::class);
         $mailer->send($message);
