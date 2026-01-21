@@ -2,12 +2,10 @@
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 defined('TYPO3') or die();
 
 $_EXTKEY = 'ns_guestbook';
-$versionNumber =  VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
 
 ExtensionUtility::registerPlugin(
     $_EXTKEY,
@@ -40,20 +38,12 @@ foreach ($pluginsPi as $listType => $pi_flexform) {
         'after:subheader',
     );
 
-    if ($versionNumber['version_main'] <= '12') {
-        // @extensionScannerIgnoreLine
-        ExtensionManagementUtility::addPiFlexFormValue(
-            $listType,
-            'FILE:EXT:ns_guestbook/Configuration/FlexForms/'.$pi_flexform,
-        );
-    } else {
-        // @extensionScannerIgnoreLine
-        ExtensionManagementUtility::addPiFlexFormValue(
-            '*',
-            'FILE:EXT:ns_guestbook/Configuration/FlexForms/'.$pi_flexform,
-            $listType,
-        );
-    }
+    // @extensionScannerIgnoreLine
+    ExtensionManagementUtility::addPiFlexFormValue(
+        '*',
+        'FILE:EXT:ns_guestbook/Configuration/FlexForms/'.$pi_flexform,
+        $listType,
+    );
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$listType] = 'recursive,select_key';
 }
 

@@ -5,8 +5,7 @@ mod.wizards.newContentElement.wizardItems.plugins {
 			title = LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:be_lable_form
 			description = LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:be_description
 			tt_content_defValues {
-				CType = list
-				list_type = nsguestbook_form
+				CType = nsguestbook_form
 			}
 		}
 		nsguestbook_message {
@@ -14,8 +13,7 @@ mod.wizards.newContentElement.wizardItems.plugins {
 			title = LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:be_lable_message
 			description = LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:be_description
 			tt_content_defValues {
-				CType = list
-				list_type = nsguestbook_message
+				CType = nsguestbook_message
 			}
 		}
 	}
