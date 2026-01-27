@@ -15,7 +15,14 @@
 					<f:then>
 						<f:if condition="{settings.sitekey} == '' || {settings.secretkey} == '' ">
 							<f:then>
-								<p class="error-msg-red"><f:translate key="google_captcha_key_required" extensionName="ns_guestbook"/></p>
+								<f:if condition="{nsguestbookdata.sitekey} == '' || {nsguestbookdata.secretkey} == '' ">
+									<f:then>
+										<p class="error-msg-red"><f:translate key="google_captcha_key_required" extensionName="ns_guestbook"/></p>
+									</f:then>
+									<f:else>
+										<div class="g-recaptcha" data-sitekey="{nsguestbookdata.sitekey}"></div>
+									</f:else>
+								</f:if>
 							</f:then>
 							<f:else>
 								<div class="g-recaptcha" data-sitekey="{settings.sitekey}"></div>

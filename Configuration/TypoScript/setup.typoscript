@@ -64,12 +64,5 @@ listAction {
                 1 = list
             }
         }
-
-        stdWrap.trim = 1
-        select {
-            where = list_type = "nsguestbook_message"
-        }
-
-        renderObj < tt_content.list.20.nsguestbook_message
     }
 }

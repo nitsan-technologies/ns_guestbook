@@ -1,0 +1,56 @@
+categories:
+  ns_guestbook:
+    label: 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:guestbook_settings'
+  ns_guestbook.view:
+    label: 'View Settings'
+    parent: ns_guestbook
+  ns_guestbook.captcha:
+    label: 'Captcha Settings'
+    parent: ns_guestbook
+
+settings:
+  ns_guestbook.templateRootPath:
+    label: 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:templateRootPath'
+    category: ns_guestbook.view
+    type: string
+    default: EXT:ns_guestbook/Resources/Private/Templates/
+  ns_guestbook.partialRootPaths:
+    label: 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:partialRootPaths'
+    category: ns_guestbook.view
+    type: string
+    default: EXT:ns_guestbook/Resources/Private/Partials/
+  ns_guestbook.layoutRootPaths:
+    label: 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:layoutRootPaths'
+    category: ns_guestbook.view
+    type: string
+    default: EXT:ns_guestbook/Resources/Private/Layouts/
+  ns_guestbook.termsRequired:
+    label: 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:termsRequired'
+    category: ns_guestbook
+    type: bool
+    default: false
+  ns_guestbook.termsTypolinkParameter:
+    label: 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:termsTypolinkParameter'
+    category: ns_guestbook
+    type: string
+    default: ''
+  ns_guestbook.autoApprove:
+    label: 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:autoApprove'
+    category: ns_guestbook
+    type: bool
+    default: false
+  ns_guestbook.addJQuery:
+    label: 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:addjQuery'
+    category: ns_guestbook
+    type: bool
+    default: false
+  ns_guestbook.sitekey:
+    label: 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:sitekeyCaptcha'
+    category: ns_guestbook.captcha
+    type: string
+    default: ''
+  ns_guestbook.secretkey:
+    label: 'LLL:EXT:ns_guestbook/Resources/Private/Language/locallang_db.xlf:secretkeyCaptcha'
+    category: ns_guestbook.captcha
+    type: string
+    default: ''

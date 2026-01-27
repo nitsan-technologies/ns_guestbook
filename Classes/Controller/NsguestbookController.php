@@ -111,7 +111,14 @@ class NsguestbookController extends ActionController
                 $pageRenderer->addFooterData("<script src='https://www.google.com/recaptcha/api.js' type='text/javascript'></script>");
             }
         }
-        $request['newNsguestbook'] = $request['newNsguestbook'] ?? '';
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($site->getSettings(),__FILE__.''.__LINE__);die;
+        $site = $this->request->getAttribute('site');
+        $request['newNsguestbook']['sitekey'] = $site->getSettings()->get('ns_guestbook.sitekey') ?? '';
+        $request['newNsguestbook']['secretkey'] = $site->getSettings()->get('ns_guestbook.secretkey') ?? '';
+        $request['newNsguestbook']['termsRequired'] = $site->getSettings()->get('ns_guestbook.termsRequired') ?? '';
+        $request['newNsguestbook']['termsTypolinkParameter'] = $site->getSettings()->get('ns_guestbook.termsTypolinkParameter') ?? '';
+        
+
         $this->view->assign('nsguestbookdata', $request['newNsguestbook']);
         return $this->htmlResponse();
     }
@@ -124,10 +131,14 @@ class NsguestbookController extends ActionController
      */
     public function createAction(Nsguestbook $newNsguestbook): ResponseInterface
     {
+        $site = $this->request->getAttribute('site');
+        $termsRequired = $site->getSettings()->get('ns_guestbook.termsRequired') ?? $this->settings['termsRequired'];
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($site->getSettings(),__FILE__.''.__LINE__);die;
+        $Autoaprrove = $site->getSettings()->get('ns_guestbook.autoApprove') ?? $this->settings['autoaprrove'];
         $settings = $this->settings;
         $error = 0;
         $mailerror = 0;
-        if($this->settings['termsRequired'] == '1' && !$newNsguestbook->getTerms()) {
+        if($termsRequired == '1' && !$newNsguestbook->getTerms()) {
             $error = 1;
         }
         if ($newNsguestbook->getName() == '' || $newNsguestbook->getEmail() == '') {
@@ -147,7 +158,7 @@ class NsguestbookController extends ActionController
             $this->addFlashMessage($checkcaptchamsg, '', ContextualFeedbackSeverity::ERROR);
             return $this->redirect('new', 'Nsguestbook', 'ns_guestbook', $_REQUEST);
         } else {
-            $secretkey = $settings['secretkey'];
+            $secretkey = $settings['secretkey'] ?? $site->getSettings()->get('ns_guestbook.secretkey');
             $response = json_decode(
                 file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secretkey . '&response=' . $captcha . '&remoteip=' . $_SERVER['REMOTE_ADDR']),
                 true
@@ -194,7 +205,7 @@ class NsguestbookController extends ActionController
                 );
 
                 $this->addFlashMessage($thanksmsg, '', ContextualFeedbackSeverity::OK);
-                if ($this->settings['autoaprrove']) {
+                if ($Autoaprrove) {
                 } else {
                     $newNsguestbook->setHidden('1');
                 }
@@ -266,19 +277,23 @@ class NsguestbookController extends ActionController
             $emailBody = $emailView->render();
         } else {
             $viewFactory = GeneralUtility::makeInstance(ViewFactoryInterface::class);
+            $site = $this->request->getAttribute('site');
         
             // Get the base Templates directory, NOT the specific file
             $frameworkConfiguration = $this->configurationManager->getConfiguration(
                 ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
             );
-            $templateRootPaths = $frameworkConfiguration['view']['templateRootPaths'];
+
+            if ($site->getSets()) {
+                $templateRootPaths['0'] = $site->getSettings()->get('ns_guestbook.templateRootPath');
+            } else {
+                $templateRootPaths = $frameworkConfiguration['view']['templateRootPaths'];
+            }
 
             // Initialize ViewFactoryData with root paths and the current request
             $viewFactoryData = new ViewFactoryData(
                 request: $this->request,
                 templateRootPaths: $templateRootPaths,
-                partialRootPaths: $frameworkConfiguration['view']['partialRootPaths'] ?? [],
-                layoutRootPaths: $frameworkConfiguration['view']['layoutRootPaths'] ?? [],
             );
 
             $emailView = $viewFactory->create($viewFactoryData);

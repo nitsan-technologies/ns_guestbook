@@ -131,6 +131,18 @@
 			<trans-unit id="addjQuery">
 				<source>Add jQuery</source>
 			</trans-unit>
+			<trans-unit id="guestbook_settings">
+				<source>Guestbook Setings</source>
+			</trans-unit>
+			<trans-unit id="templateRootPath">
+				<source>TempleteRootPath</source>
+			</trans-unit>
+			<trans-unit id="layoutRootPaths">
+				<source>LayoutRootPath</source>
+			</trans-unit>
+			<trans-unit id="partialRootPaths">
+				<source>PartialRootPath</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
