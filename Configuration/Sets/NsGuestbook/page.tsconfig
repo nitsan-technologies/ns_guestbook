@@ -1,1 +1,1 @@
-@import 'EXT:ns_guestbook/Configuration/TypoScript/page.tsconfig'
+@import 'EXT:ns_guestbook/Configuration/page.tsconfig'
