@@ -111,7 +111,6 @@ class NsguestbookController extends ActionController
                 $pageRenderer->addFooterData("<script src='https://www.google.com/recaptcha/api.js' type='text/javascript'></script>");
             }
         }
-        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($site->getSettings(),__FILE__.''.__LINE__);die;
         $site = $this->request->getAttribute('site');
         $request['newNsguestbook']['sitekey'] = $site->getSettings()->get('ns_guestbook.sitekey') ?? '';
         $request['newNsguestbook']['secretkey'] = $site->getSettings()->get('ns_guestbook.secretkey') ?? '';
@@ -132,9 +131,8 @@ class NsguestbookController extends ActionController
     public function createAction(Nsguestbook $newNsguestbook): ResponseInterface
     {
         $site = $this->request->getAttribute('site');
-        $termsRequired = $site->getSettings()->get('ns_guestbook.termsRequired') ?? $this->settings['termsRequired'];
-        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($site->getSettings(),__FILE__.''.__LINE__);die;
-        $Autoaprrove = $site->getSettings()->get('ns_guestbook.autoApprove') ?? $this->settings['autoaprrove'];
+        $termsRequired = $site->getSettings()->get('ns_guestbook.termsRequired') ?? $this->settings['termsRequired'] ?? 0;
+        $Autoaprrove = $site->getSettings()->get('ns_guestbook.autoApprove') ?? $this->settings['autoaprrove'] ?? 0;
         $settings = $this->settings;
         $error = 0;
         $mailerror = 0;
@@ -268,7 +266,7 @@ class NsguestbookController extends ActionController
             $emailView->setRequest($this->request);
         
             $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-            $templateRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPaths']['0']);
+            $templateRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPaths']['0']) ?? ['',''];
             $templatePathAndFilename = $templateRootPath . 'Email/' . $templateName . '.html';
         
             $emailView->setTemplatePathAndFilename($templatePathAndFilename);
