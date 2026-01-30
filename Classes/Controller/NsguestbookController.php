@@ -257,8 +257,7 @@ class NsguestbookController extends ActionController
         array  $variables = []
     ): bool {
         $versionNumber =  VersionNumberUtility::convertVersionStringToArray(VersionNumberUtility::getCurrentTypo3Version());
-        $site = $this->request->getAttribute('site');
-        if ($versionNumber['version_main'] <= '13') {
+        if ($versionNumber['version_main'] == '12') {
             /** @var StandaloneView $emailView */
             // @extensionScannerIgnoreLine
             $emailView = GeneralUtility::makeInstance(StandaloneView::class);
@@ -267,11 +266,7 @@ class NsguestbookController extends ActionController
             $emailView->setRequest($this->request);
         
             $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-            if ($site->getSets()) {
-                $templateRootPath = $site->getSettings()->get('ns_guestbook.templateRootPath');
-            } else {
-                $templateRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPaths']['0']) ?? ['',''];
-            }
+            $templateRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPaths']['0']) ?? ['',''];
             $templatePathAndFilename = $templateRootPath . 'Email/' . $templateName . '.html';
         
             $emailView->setTemplatePathAndFilename($templatePathAndFilename);
@@ -279,9 +274,9 @@ class NsguestbookController extends ActionController
         
             $emailBody = $emailView->render();
         } else {
+            $site = $this->request->getAttribute('site') ?? [];
             $viewFactory = GeneralUtility::makeInstance(ViewFactoryInterface::class);
         
-            // Get the base Templates directory, NOT the specific file
             $frameworkConfiguration = $this->configurationManager->getConfiguration(
                 ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
             );
@@ -292,7 +287,6 @@ class NsguestbookController extends ActionController
                 $templateRootPaths = $frameworkConfiguration['view']['templateRootPaths'];
             }
 
-            // Initialize ViewFactoryData with root paths and the current request
             $viewFactoryData = new ViewFactoryData(
                 request: $this->request,
                 templateRootPaths: $templateRootPaths,
@@ -301,8 +295,6 @@ class NsguestbookController extends ActionController
             $emailView = $viewFactory->create($viewFactoryData);
             $emailView->assignMultiple($variables);
 
-            // Specify the template relative to the root (e.g., 'Email/MailTemplate')
-            // Do not include the .html extension here
             $emailBody = $emailView->render('Email/' . $templateName);
         }
         /** @var $message MailMessage */
