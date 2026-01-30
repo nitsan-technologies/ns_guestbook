@@ -29,14 +29,28 @@
 	<f:form.textarea property="message" id="editor1" rows="10" cols="120" value="{nsguestbookdata.message}" />
 </div>
 <f:if condition="{settings.termsRequired}">
-	<div class="ns-form-group">
-		<label for="terms" class="ns-form-checkbox">
-			<f:translate key="terms" />
-		</label>
-		<div class="ns-form-group__condition">
-			<f:form.checkbox property="terms" id="terms" value="1" required="true"/>
-			<f:translate key="acceptTerms" /><f:link.external uri="{settings.termsTypolinkParameter}" target="_blank"><f:translate key="readTerms" /></f:link.external><span class="terms">*</span>
-
+	<f:then>
+		<div class="ns-form-group">
+			<label for="terms" class="ns-form-checkbox">
+				<f:translate key="terms" />
+			</label>
+			<div class="ns-form-group__condition">
+				<f:form.checkbox property="terms" id="terms" value="1" required="true"/>
+				<f:translate key="acceptTerms" /><f:link.external uri="{settings.termsTypolinkParameter}" target="_blank"><f:translate key="readTerms" /></f:link.external><span class="terms">*</span>
+			</div>
 		</div>
-	</div>
+	</f:then>
+	<f:else>
+		<f:if condition = "{nsguestbookdata.termsRequired}">
+			<div class="ns-form-group">
+			<label for="terms" class="ns-form-checkbox">
+				<f:translate key="terms" />
+			</label>
+			<div class="ns-form-group__condition">
+				<f:form.checkbox property="terms" id="terms" value="1" required="true"/>
+				<f:translate key="acceptTerms" /><f:link.external uri="{nsguestbookdata.termsTypolinkParameter}" target="_blank"><f:translate key="readTerms" /></f:link.external><span class="terms">*</span>
+			</div>
+		</div>
+		</f:if>
+	</f:else>
 </f:if>

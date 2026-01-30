@@ -72,7 +72,7 @@
 			<trans-unit id="be_lable_message">
 				<source>Guestbook Message</source>
 			</trans-unit>				
-			<trans-unit id="be_desctiption">
+			<trans-unit id="be_description">
 				<source>This extension will help you to collect review from guest.</source>
 			</trans-unit>
 			<trans-unit id="flexform.select">
@@ -130,6 +130,18 @@
 			</trans-unit>
 			<trans-unit id="addjQuery">
 				<source>Add jQuery</source>
+			</trans-unit>
+			<trans-unit id="guestbook_settings">
+				<source>Guestbook Setings</source>
+			</trans-unit>
+			<trans-unit id="templateRootPath">
+				<source>TempleteRootPath</source>
+			</trans-unit>
+			<trans-unit id="layoutRootPaths">
+				<source>LayoutRootPath</source>
+			</trans-unit>
+			<trans-unit id="partialRootPaths">
+				<source>PartialRootPath</source>
 			</trans-unit>
 		</body>
 	</file>

@@ -1,7 +1,7 @@
 {
   "name": "nitsan/ns-guestbook",
   "type": "typo3-cms-extension",
-  "description": "TYPO3 Guestbook Extension easily integrates all the features of a guestbook, including a review form with email sending functionality. This TYPO3 guestbook plugin also includes spam protection and numerous customization options. Guests can share their reviews, ratings, and contact details, as well as personal experiences, through this Guestbook TYPO3 Extension.",
+  "description": "Advanced Guestbook for TYPO3 - TYPO3 Guestbook Extension easily integrates all the features of a guestbook, including a review form with email sending functionality. This TYPO3 guestbook plugin also includes spam protection and numerous customization options. Guests can share their reviews, ratings, and contact details, as well as personal experiences, through this Guestbook TYPO3 Extension.",
   "homepage": "https://extensions.typo3.org/extension/ns_guestbook/",
   "license": "GPL-2.0+",
   "keywords": [
@@ -17,7 +17,7 @@
     "issues": "https://github.com/nitsan-technologies/ns_guestbook/issues"
   },
   "require": {
-    "typo3/cms-core": "^12 || ^13"
+    "typo3/cms-core": "^12.4.37 || ^13 || ^14"
   },
   "autoload": {
     "psr-4": {

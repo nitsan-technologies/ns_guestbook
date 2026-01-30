@@ -1,0 +1,25 @@
+@import 'EXT:ns_guestbook/Configuration/TypoScript/setup.typoscript'
+
+plugin {
+    tx_nsguestbook_form {
+        view {
+            templateRootPaths.1 = {$ns_guestbook.templateRootPath}
+            partialRootPaths.1 = {$ns_guestbook.partialRootPaths}
+            layoutRootPaths.1 = {$ns_guestbook.layoutRootPaths}
+        }
+        settings {
+            autoaprrove = {$ns_guestbook.autoApprove}
+            sitekey = {$ns_guestbook.sitekey}
+            secretkey = {$ns_guestbook.secretkey}
+            termsRequired = {$ns_guestbook.termsRequired}
+            termsTypolinkParameter = {$ns_guestbook.termsTypolinkParameter}
+        }
+    }
+}
+
+page {
+    includeJSLibs {
+        nsfjquery = EXT:ns_guestbook/Resources/Public/js/jquery-2.1.0.js
+        nsfjquery.if.isTrue = {$ns_guestbook.addJQuery}
+    }
+}

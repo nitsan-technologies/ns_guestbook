@@ -30,7 +30,20 @@ $pluginsPi = [
 
 foreach ($pluginsPi as $listType => $pi_flexform) {
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$listType] = 'pi_flexform';
-    ExtensionManagementUtility::addPiFlexFormValue($listType, 'FILE:EXT:ns_guestbook/Configuration/FlexForms/'.$pi_flexform);
+
+    ExtensionManagementUtility::addToAllTCAtypes(
+        'tt_content',
+        '--div--;Configuration,pi_flexform,pages',
+        $listType,
+        'after:subheader',
+    );
+
+    // @extensionScannerIgnoreLine
+    ExtensionManagementUtility::addPiFlexFormValue(
+        '*',
+        'FILE:EXT:ns_guestbook/Configuration/FlexForms/'.$pi_flexform,
+        $listType,
+    );
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$listType] = 'recursive,select_key';
 }
 

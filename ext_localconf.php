@@ -6,7 +6,6 @@ use Nitsan\NsGuestbook\Controller\NsguestbookController;
 if (!defined('TYPO3')) {
     die('Access denied.');
 }
-
 ExtensionUtility::configurePlugin(
     'ns_guestbook',
     'Form',
@@ -16,7 +15,8 @@ ExtensionUtility::configurePlugin(
     // non-cacheable actions
     [
         NsguestbookController::class => 'create',
-    ]
+    ],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
 );
 
 ExtensionUtility::configurePlugin(
@@ -28,5 +28,6 @@ ExtensionUtility::configurePlugin(
     // non-cacheable actions
     [
         NsguestbookController::class => 'list',
-    ]
+    ],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
 );

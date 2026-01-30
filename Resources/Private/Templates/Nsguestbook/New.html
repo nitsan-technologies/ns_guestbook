@@ -11,25 +11,32 @@
 		<div class="ns-form-row">
 			<f:render partial="Nsguestbook/FormFields" arguments="{nsguestbookdata:nsguestbookdata}" />
 			<div class="ns-form-group">
-			<f:if condition="{settings.captcha} == 0">
-				<f:then>
-					<f:if condition="{settings.sitekey} == '' || {settings.secretkey} == '' ">
-						<f:then>
-							<p class="error-msg-red"><f:translate key="google_captcha_key_required" extensionName="ns_guestbook"/></p>
-						</f:then>
-						<f:else>
-							<div class="g-recaptcha" data-sitekey="{settings.sitekey}"></div>
-						</f:else>
-					</f:if>
-				</f:then>	
-			</f:if>
+				<f:if condition="{settings.captcha} == 0">
+					<f:then>
+						<f:if condition="{settings.sitekey} == '' || {settings.secretkey} == '' ">
+							<f:then>
+								<f:if condition="{nsguestbookdata.sitekey} == '' || {nsguestbookdata.secretkey} == '' ">
+									<f:then>
+										<p class="error-msg-red"><f:translate key="google_captcha_key_required" extensionName="ns_guestbook"/></p>
+									</f:then>
+									<f:else>
+										<div class="g-recaptcha" data-sitekey="{nsguestbookdata.sitekey}"></div>
+									</f:else>
+								</f:if>
+							</f:then>
+							<f:else>
+								<div class="g-recaptcha" data-sitekey="{settings.sitekey}"></div>
+							</f:else>
+						</f:if>
+					</f:then>	
+				</f:if>
 			</div>
 			<div class="ns-form-group">
 				<p class="text-muted"><f:translate key="require" extensionName="ns_guestbook"/></p>
 			</div>
 			<div class="ns-form-group">
-        <f:form.submit class="btn ns-btn submit" value="{f:translate(key: 'new.create')}" />
-    </div>
+				<f:form.submit class="btn ns-btn submit" value="{f:translate(key: 'new.create')}" />
+			</div>
 		</div>
 	</f:form>
 </f:section>
